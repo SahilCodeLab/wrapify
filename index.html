@@ -59,7 +59,7 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body.loaded {
@@ -1022,10 +1022,13 @@
             const preloader = document.getElementById('preloader');
             const body = document.body;
 
+            // If user comes from loading.html, make it faster
+            const delay = document.referrer.includes('loading.html') ? 200 : 800;
+
             setTimeout(() => {
                 preloader.classList.add('fade-out');
                 body.classList.add('loaded');
-            }, 800);
+            }, delay);
         });
 
         // 3D Phone Tilt Interactive (Desktop Only)
