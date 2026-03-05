@@ -7,13 +7,15 @@
     <title>Privacy Protocol — Wrapify</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&family=Outfit:wght@300;600;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg: #000;
             --primary: #fff;
+            --emerald: #00ff88;
             --muted: #86868b;
             --border: rgba(255, 255, 255, 0.1);
             --ease: cubic-bezier(0.65, 0, 0.35, 1);
@@ -29,8 +31,14 @@
             background: var(--bg);
             color: var(--primary);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            line-height: 1.8;
             -webkit-font-smoothing: antialiased;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
         }
 
         .container {
@@ -52,11 +60,16 @@
         }
 
         .logo {
+            font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             text-decoration: none;
             color: white;
-            letter-spacing: -1px;
+            letter-spacing: -2px;
+        }
+
+        .logo span {
+            color: var(--emerald);
         }
 
         .btn-back {
@@ -64,31 +77,51 @@
             color: var(--muted);
             font-size: 0.9rem;
             transition: 0.3s;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .btn-back:hover {
             color: white;
         }
 
-        .content h1 {
-            font-size: 4rem;
+        .content {
+            margin-bottom: 100px;
+        }
+
+        .tag {
+            color: var(--emerald);
+            font-size: 0.7rem;
             font-weight: 900;
-            letter-spacing: -3px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .content h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -4px;
             margin-bottom: 40px;
-            line-height: 1;
+            line-height: 0.9;
         }
 
         .content h2 {
-            font-size: 1.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
             font-weight: 700;
             margin-top: 60px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
         }
 
         .content p {
             color: var(--muted);
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             margin-bottom: 30px;
+            font-weight: 300;
         }
 
         .content ul {
@@ -101,79 +134,96 @@
             margin-bottom: 15px;
             position: relative;
             padding-left: 20px;
+            font-weight: 300;
         }
 
         .content li::before {
             content: "—";
             position: absolute;
             left: 0;
-            color: var(--border);
+            color: var(--emerald);
         }
 
         .content strong {
             color: white;
+            font-weight: 600;
         }
 
         footer {
             padding: 80px 0;
             border-top: 1px solid var(--border);
-            margin-top: 100px;
             text-align: center;
-            color: var(--muted);
-            font-size: 0.8rem;
+        }
+
+        .copy {
+            font-size: 0.75rem;
+            color: #333;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
         }
 
         @media (max-width: 768px) {
             .content h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
+                letter-spacing: -2px;
+            }
+
+            header {
+                padding: 30px 0;
+                margin-bottom: 60px;
             }
         }
     </style>
 </head>
 
-<body>
+<body onload="document.body.className+=' loaded'">
 
     <header>
         <div class="container">
             <div class="nav">
-                <a href="index.html" class="logo">WRAPIFY</a>
+                <a href="index.html" class="logo">WRAPIFY<span>.</span></a>
                 <a href="index.html" class="btn-back">BACK TO HOME</a>
             </div>
         </div>
     </header>
 
     <main class="container content">
-        <p
-            style="text-transform: uppercase; font-size: 0.7rem; letter-spacing: 5px; color: var(--muted); margin-bottom: 20px;">
-            SECURITY PROTOCOL v2.0</p>
-        <h1>Your Data. <br> Locally Handled.</h1>
-        <p>Wrapify is engineered by <strong>SahilCodeLab</strong> with absolute privacy at its core. We don't believe in
-            cloud storage for your personal memories.</p>
+        <span class="tag">Security Protocol</span>
+        <h1>Sanctuary. <br> Locally Handled.</h1>
+        <p>At <strong>SahilCodeLab</strong>, we believe that your personal memories belong to you. Wrapify is engineered
+            with a strict local-first philosophy.</p>
 
-        <h2>01. Zero Cloud Policy</h2>
-        <p>Every calculation, from message frequency to relationship mapping, happens on your phone's processor. No
-            remote servers are involved in the parsing of your conversations.</p>
+        <h2>01. Absolute Localism</h2>
+        <p>Your WhatsApp chat history is a private dialogue. Wrapify parses this data entirely on your device's
+            processor. No cloud APIs, no external synchronization, and no remote databases.</p>
 
-        <h2>02. No Data Harvest</h2>
-        <p>We do not collect usage statistics, analytics, or behavioral data. Our business model is built on trust, not
-            your identity.</p>
-
-        <h2>03. Sandbox Processing</h2>
+        <h2>02. Zero Collection Policy</h2>
+        <p>Our commitment to privacy is simple: we do not collect what we do not need.
         <ul>
-            <li><strong>Encrypted Reading:</strong> Files are read into a temporary memory sandbox.</li>
-            <li><strong>Instant Wipe:</strong> All raw text data is cleared from memory once the visualization is
-                generated.</li>
-            <li><strong>User Sovereignty:</strong> You decide what to save, what to share, and what to keep private.
+            <li><strong>No User Identification:</strong> We do not require account creation, phone numbers, or emails.
             </li>
+            <li><strong>No Tracking:</strong> We use zero 3rd-party analytics. No Google Firebase, no Meta Pixel.</li>
+            <li><strong>No Behavioral Harvesting:</strong> Your interactions within the app are not monitored.</li>
         </ul>
+        </p>
 
-        <h2>04. Contact</h2>
-        <p>If you wish to audit our protocol or have security inquiries, reach out to the developer at SahilCodeLab.</p>
+        <h2>03. Input Cryptography</h2>
+        <p>When you import a <code>.txt</code> export, the data enters a temporary memory sandbox. Once the visual
+            insights are rendered and you exit the screen, the raw text is immediately wiped from the system RAM.</p>
+
+        <h2>04. Hardware Privacy</h2>
+        <p>Wrapify only requests access to local storage to read your selected file and save your generated
+            masterpieces. We operate flawlessly in **Airplane Mode**, proving our 100% offline commitment.</p>
+
+        <h2>05. Developer Note</h2>
+        <p>Innovated by Sahil in India, Wrapify is a tribute to the beauty of data and the sanctity of the individual.
+            For security audits or inquiries, contact us through the official SahilCodeLab channels.</p>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 SahilCodeLab. Distributed by India Labs.</p>
+            <p class="copy">SahilCodeLab &copy; 2026</p>
         </div>
     </footer>
 

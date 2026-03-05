@@ -4,32 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wrapify — Redefining Digital Memories</title>
+    <title>Wrapify | The Private Intelligence Engine by SahilCodeLab</title>
 
-    <!-- Meta Tags -->
-    <meta name="description"
-        content="Wrapify: The most private, premium WhatsApp analytics engine. Local analysis, cinematic visuals, and your year in review by SahilCodeLab.">
-    <meta name="author" content="SahilCodeLab">
-
-    <!-- Premium Fonts -->
+    <!-- Premium Assets -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&family=Outfit:wght@300;600;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- AOS for Smooth Entrances -->
+    <!-- Animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
             --bg: #000000;
             --primary: #ffffff;
-            --accent: #00ff88;
-            /* Elite Emerald */
+            --emerald: #00ff88;
+            --sapphire: #0070ff;
             --muted: #86868b;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.08);
             --ease: cubic-bezier(0.65, 0, 0.35, 1);
         }
 
@@ -37,39 +32,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            outline: none;
             -webkit-tap-highlight-color: transparent;
         }
 
         html,
         body {
-            background-color: var(--bg);
+            background: var(--bg);
             color: var(--primary);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Custom Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-        }
-
-        /* --- Preloader: The Entry Protocol --- */
+        /* --- PRELOADER: THE NEURAL SYNC --- */
         #preloader {
             position: fixed;
             inset: 0;
@@ -82,110 +57,95 @@
             transition: transform 1.2s var(--ease), opacity 1s linear;
         }
 
-        .loader-content {
+        #preloader.exit {
+            transform: scale(1.1);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .neural-loader {
             position: relative;
             width: 300px;
             text-align: center;
         }
 
-        .loader-logo {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 40px;
-            filter: grayscale(1);
-            opacity: 0.8;
-        }
-
-        .load-percentage {
-            font-size: 5rem;
-            font-weight: 100;
-            letter-spacing: -3px;
+        /* Percentage Counter */
+        .load-count {
+            font-family: 'Outfit', sans-serif;
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: -5px;
             line-height: 1;
             margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .load-bar-container {
+        .bar-container {
             width: 100%;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
         }
 
-        .load-bar-fill {
+        .bar-fill {
             position: absolute;
             left: 0;
             top: 0;
             height: 100%;
             width: 0%;
-            background: var(--primary);
+            background: var(--emerald);
+            box-shadow: 0 0 20px var(--emerald);
             transition: width 0.1s linear;
         }
 
         .load-status {
-            margin-top: 20px;
-            font-size: 0.7rem;
+            margin-top: 25px;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             color: var(--muted);
-            font-weight: 400;
         }
 
-        #preloader.exit {
-            transform: translateY(-100%);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* --- Layout --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        section {
-            padding: 160px 0;
-        }
-
-        /* --- Header --- */
+        /* --- NAVIGATION --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 30px 0;
-            transition: all 0.5s var(--ease);
+            padding: 35px 0;
+            transition: 0.5s var(--ease);
         }
 
         header.scrolled {
             padding: 20px 0;
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--border);
         }
 
         .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
+            font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             text-decoration: none;
             color: white;
-            letter-spacing: -1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            letter-spacing: -2px;
         }
 
-        .logo img {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
+        .logo span {
+            color: var(--emerald);
         }
 
         .nav-links {
@@ -197,179 +157,254 @@
         .nav-links a {
             text-decoration: none;
             color: var(--muted);
-            font-size: 0.9rem;
-            transition: 0.3s;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.4s;
+            letter-spacing: 1px;
         }
 
         .nav-links a:hover {
             color: white;
         }
 
-        .btn-premium {
-            padding: 12px 30px;
+        .btn-elite {
+            padding: 12px 32px;
             background: white;
             color: black;
             border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.8rem;
             text-decoration: none;
-            border: 1px solid white;
             transition: 0.4s var(--ease);
+            border: 1px solid white;
         }
 
-        .btn-premium:hover {
+        .btn-elite:hover {
             background: transparent;
             color: white;
         }
 
-        /* --- Hero --- */
+        /* --- HERO --- */
         .hero {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+
+        .hero-content {
             text-align: center;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 900;
-            letter-spacing: -5px;
-            line-height: 0.9;
-            margin-bottom: 30px;
+            z-index: 2;
             opacity: 0;
-            transform: translateY(50px);
-            transition: 1s var(--ease) 1.5s;
+            transform: translateY(30px);
+            transition: 1s var(--ease) 1s;
         }
 
-        .hero.reveal h1 {
+        .hero.active .hero-content {
             opacity: 1;
             transform: translateY(0);
         }
 
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            letter-spacing: -6px;
+            line-height: 0.85;
+            margin-bottom: 40px;
+        }
+
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             color: var(--muted);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto 50px;
-            opacity: 0;
-            transition: 1s var(--ease) 1.8s;
+            line-height: 1.6;
         }
 
-        .hero.reveal p {
-            opacity: 1;
-        }
-
-        /* --- Visual Showcase --- */
-        .visual-wall {
+        /* --- THE MASTERPIECE: 10 SLICE GALLERY --- */
+        .gallery-section {
+            padding: 180px 0;
             background: #050505;
         }
 
-        .wall-grid {
+        .section-tag {
+            color: var(--emerald);
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            display: block;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            text-align: center;
+            margin-bottom: 120px;
+            letter-spacing: -3px;
+        }
+
+        .gallery-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            padding: 0 20px;
         }
 
-        .wall-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 20px;
+        .gallery-item {
+            aspect-ratio: 9/19;
+            border-radius: 24px;
             overflow: hidden;
-            aspect-ratio: 9/16;
-            transition: 0.6s var(--ease);
+            border: 1px solid var(--border);
+            transition: 0.8s var(--ease);
+            position: relative;
         }
 
-        .wall-card:hover {
-            transform: scale(1.05);
-            border-color: var(--accent);
+        .gallery-item:hover {
+            transform: scale(1.08) translateY(-20px);
+            z-index: 10;
+            border-color: var(--emerald);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
         }
 
-        .wall-card img {
+        .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.7;
-            transition: 0.6s;
+            opacity: 0.6;
+            transition: 0.8s;
         }
 
-        .wall-card:hover img {
+        .gallery-item:hover img {
             opacity: 1;
+            transform: scale(1.1);
         }
 
-        /* --- Features --- */
+        /* --- FEATURE GRID --- */
+        .features {
+            padding: 160px 0;
+            border-top: 1px solid var(--border);
+        }
+
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
         }
 
-        .feature-item h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            color: white;
+        .feature-box h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-weight: 900;
         }
 
-        .feature-item p {
+        .feature-box p {
             color: var(--muted);
+            font-size: 1.1rem;
             line-height: 1.8;
         }
 
-        /* --- Large Trust Section --- */
-        .trust-banner {
+        /* --- PRIVACY PROTOCOL --- */
+        .privacy-cta {
+            padding: 160px 0;
             text-align: center;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
         }
 
-        .trust-banner h2 {
-            font-size: 4rem;
-            margin-bottom: 40px;
-            letter-spacing: -2px;
-        }
-
-        /* --- Privacy Focus --- */
-        .privacy-box {
+        .privacy-card {
             background: white;
-            border-radius: 40px;
-            padding: 100px;
             color: black;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            border-radius: 50px;
+            padding: 120px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
             align-items: center;
-            gap: 80px;
+            justify-content: space-between;
+            text-align: left;
         }
 
-        .privacy-box h2 {
-            font-size: 3.5rem;
-            line-height: 1;
-            letter-spacing: -2px;
+        .privacy-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4.5rem;
+            line-height: 0.9;
+            letter-spacing: -3px;
             margin-bottom: 30px;
-            color: black;
         }
 
-        .privacy-box p {
-            font-size: 1.2rem;
+        .privacy-card p {
+            font-size: 1.25rem;
             color: #555;
-            margin-bottom: 40px;
+            max-width: 500px;
+            margin-bottom: 50px;
         }
 
-        /* --- Responsive --- */
-        @media (max-width: 1024px) {
-            .feature-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 50px;
+        /* --- FOOTER --- */
+        footer {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            display: block;
+            text-decoration: none;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            list-style: none;
+            margin-bottom: 60px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #333;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 1200px) {
+            .gallery-container {
+                grid-template-columns: repeat(3, 1fr);
             }
 
-            .wall-grid {
-                grid-template-columns: 1fr 1fr;
+            .privacy-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 80px 40px;
+                margin: 0 5%;
             }
 
-            .privacy-box {
-                grid-template-columns: 1fr;
-                padding: 60px 40px;
+            .privacy-card p {
+                margin: 0 auto 50px;
             }
         }
 
@@ -378,25 +413,30 @@
                 display: none;
             }
 
-            section {
-                padding: 100px 0;
-            }
-
             .hero h1 {
-                font-size: 4.5rem;
                 letter-spacing: -3px;
             }
 
-            .trust-banner h2 {
-                font-size: 2.5rem;
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
             }
 
             .feature-grid {
                 grid-template-columns: 1fr;
+                gap: 60px;
             }
 
-            .wall-grid {
-                grid-template-columns: 1fr;
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .privacy-card h2 {
+                font-size: 2.8rem;
+            }
+
+            header {
+                padding: 25px 0;
             }
         }
     </style>
@@ -404,174 +444,149 @@
 
 <body>
 
-    <!-- Minimalist Preloader -->
+    <!-- PRELOADER -->
     <div id="preloader">
-        <div class="loader-content">
-            <img src="icon.jpg" alt="Logo" class="loader-logo">
-            <div class="load-percentage" id="percent">0</div>
-            <div class="load-bar-container">
-                <div class="load-bar-fill" id="bar"></div>
+        <div class="neural-loader">
+            <div class="load-count" id="count">0</div>
+            <div class="bar-container">
+                <div class="bar-fill" id="bar"></div>
             </div>
-            <p class="load-status" id="status">Syncing Intelligence</p>
+            <p class="load-status" id="status">ESTABLISHING NEURAL LINK</p>
         </div>
     </div>
 
-    <!-- Header -->
+    <!-- HEADER -->
     <header id="header">
-        <div class="container">
-            <div class="nav-inner">
-                <a href="#" class="logo">
-                    <img src="icon.jpg" alt="Icon">
-                    WRAPIFY
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#about">Genesis</a></li>
-                    <li><a href="#showcase">Showcase</a></li>
-                    <li><a href="#privacy">Privacy</a></li>
-                </ul>
-                <a href="app-release.apk" class="btn-premium">DOWNLOAD</a>
-            </div>
+        <div class="nav-inner">
+            <a href="#" class="logo">WRAPIFY<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#vision">VISION</a></li>
+                <li><a href="#gallery">GALLERY</a></li>
+                <li><a href="#security">SECURITY</a></li>
+            </ul>
+            <a href="app-release.apk" class="btn-elite">INSTALL APK</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- HERO -->
     <section class="hero" id="home">
-        <div class="container" id="heroContainer">
-            <h1 data-aos="fade-up">The Future <br> of Memories.</h1>
-            <p data-aos="fade-up" data-aos-delay="200">Cinematic chat analytics for the modern individual. Secure by
-                design. Aesthetic by choice.</p>
+        <div class="hero-content">
+            <h1 data-aos="fade-up">Memories, <br> Modernized.</h1>
+            <p data-aos="fade-up" data-aos-delay="200">The definitive private WhatsApp analytics architecture. <br>
+                Aesthetic visuals. Cinematic data. Secured by SahilCodeLab.</p>
             <div data-aos="fade-up" data-aos-delay="400">
-                <a href="app-release.apk" class="btn-premium" style="padding: 18px 50px; font-size: 1.1rem;">GET WRAPIFY
+                <a href="app-release.apk" class="btn-elite" style="padding: 20px 60px; font-size: 1rem;">GET WRAPIFY
                     v2.0</a>
             </div>
         </div>
     </section>
 
-    <!-- Showcase Wall -->
-    <section class="visual-wall" id="showcase">
-        <div class="container">
-            <div style="margin-bottom: 100px; text-align: center;">
-                <p style="color: var(--accent); font-weight: 700; letter-spacing: 5px; margin-bottom: 20px;">GALLERY</p>
-                <h2 style="font-size: 3rem; letter-spacing: -2px;">Visual excellence in every pixel.</h2>
-            </div>
-            <div class="wall-grid">
-                <div class="wall-card" data-aos="fade-up">
-                    <img src="Slice 1.jpg" alt="Showcase 1">
-                </div>
-                <div class="wall-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="Slice 4.jpg" alt="Showcase 2">
-                </div>
-                <div class="wall-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="Slice 7.jpg" alt="Showcase 3">
-                </div>
-            </div>
+    <!-- GALLERY (ALL 10 SLICES) -->
+    <section class="gallery-section" id="gallery">
+        <span class="section-tag">Visual Protocol</span>
+        <h2 class="section-title">One Interface. <br> Infinite Detail.</h2>
+        <div class="gallery-container">
+            <div class="gallery-item" data-aos="fade-up"><img src="Slice 1.jpg" alt="1"></div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100"><img src="Slice 2.jpg" alt="2"></div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200"><img src="Slice 3.jpg" alt="3"></div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300"><img src="Slice 4.jpg" alt="4"></div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="400"><img src="Slice 5.jpg" alt="5"></div>
+            <div class="gallery-item" data-aos="fade-up"><img src="Slice 6.jpg" alt="6"></div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100"><img src="Slice 7.jpg" alt="7"></div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200"><img src="Slice 8.jpg" alt="8"></div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300"><img src="Slice 9.jpg" alt="9"></div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="400"><img src="Slice 10.jpg" alt="10"></div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section class="container" id="about">
+    <!-- FEATURES -->
+    <section class="features" id="vision">
         <div class="feature-grid">
-            <div class="feature-item" data-aos="fade-up">
-                <h3>01. Neural Logic</h3>
-                <p>Advanced parsing algorithms that understand conversational nuances, creating the most accurate
-                    portrait of your relationships.</p>
+            <div class="feature-box" data-aos="fade-up">
+                <h3>Privacy First</h3>
+                <p>Wrapify is a local-only engine. We don't believe in the cloud. Your data stays in your hands,
+                    processed entirely on your hardware.</p>
             </div>
-            <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
-                <h3>02. Local Vault</h3>
-                <p>Data sovereignty is our priority. Every byte of your chat history is processed locally on your
-                    hardware. Zero cloud risk.</p>
+            <div class="feature-box" data-aos="fade-up" data-aos-delay="100">
+                <h3>Neural Parsing</h3>
+                <p>Our algorithms go beyond frequencies. We analyze time-patterns, relationship dynamics, and visual
+                    sentiment for a deeper perspective.</p>
             </div>
-            <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
-                <h3>03. Art of Data</h3>
-                <p>Why settle for boring stats? Wrapify transforms raw data into high-end visual cards ready for the
-                    world to see.</p>
+            <div class="feature-box" data-aos="fade-up" data-aos-delay="200">
+                <h3>Elite UI</h3>
+                <p>An interface like this does not exist elsewhere. Fluid animations, glassmorphism, and cinematic
+                    layouts for the digital elite.</p>
             </div>
         </div>
     </section>
 
-    <!-- Privacy Protocol -->
-    <section class="container" id="privacy">
-        <div class="privacy-box" data-aos="zoom-in">
+    <!-- PRIVACY -->
+    <section class="privacy-cta" id="security">
+        <div class="privacy-card" data-aos="zoom-in">
             <div>
-                <h2>Your Privacy, <br> Built-In.</h2>
-                <p>We designed Wrapify to be a fortress. No trackers, no profiles, and absolutely no data collection.
-                    Just pure, private insights.</p>
-                <a href="privacy.html" class="btn-premium" style="background: black; color: white;">READ SECURITY
-                    PROTOCOL</a>
+                <h2>Sanctuary of <br> Your Data.</h2>
+                <p>We designed Wrapify to be a fortress. No profiles, no trackers, zero collection. It's your history,
+                    secured by SahilCodeLab.</p>
+                <a href="privacy.html" class="btn-elite" style="background: black; color: white;">READ THE PROTOCOL</a>
             </div>
-            <div style="text-align: right;">
-                <i class="fa-solid fa-shield-halved" style="font-size: 12rem; color: #000; opacity: 0.05;"></i>
+            <div style="font-size: 15rem; color: #000; opacity: 0.03;">
+                <i class="fa-solid fa-lock"></i>
             </div>
         </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="trust-banner">
+    <!-- FOOTER -->
+    <footer>
         <div class="container">
-            <h2 data-aos="fade-up">Developed by SahilCodeLab.</h2>
-            <p style="color: var(--muted); margin-bottom: 60px;">Innovating privacy-first digital architecture from
-                India.</p>
-            <div data-aos="zoom-in" data-aos-delay="200">
-                <a href="app-release.apk" class="btn-premium">DOWNLOAD APK</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer style="padding: 100px 0; border-top: 1px solid var(--border);">
-        <div class="container"
-            style="display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.8rem;">
-            <p>&copy; 2026 SahilCodeLab. Premium Distributed Edition.</p>
-            <div style="display: flex; gap: 30px;">
-                <a href="#" style="color: var(--muted); text-decoration: none;">GitHub</a>
-                <a href="#" style="color: var(--muted); text-decoration: none;">X / Twitter</a>
-                <a href="privacy.html" style="color: var(--muted); text-decoration: none;">Privacy</a>
-            </div>
+            <a href="#" class="footer-logo">WRAPIFY<span>.</span></a>
+            <ul class="footer-links">
+                <li><a href="https://github.com">GITHUB</a></li>
+                <li><a href="privacy.html">PRIVACY</a></li>
+                <li><a href="#">INSTAGRAM</a></li>
+                <li><a href="#">X / TWITTER</a></li>
+            </ul>
+            <p class="copyright">Innovated in India by SahilCodeLab &copy; 2026</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Init AOS
         AOS.init({ duration: 1000, once: true, offset: 50 });
 
-        // Header Effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         });
 
-        // Preloader Logic
-        const percent = document.getElementById('percent');
+        // PRELOADER ENGINE
+        const count = document.getElementById('count');
         const bar = document.getElementById('bar');
         const preloader = document.getElementById('preloader');
         const hero = document.getElementById('home');
-        const statuses = ["Syncing", "Parsing", "Encrypting", "Almost There"];
-        const statusText = document.getElementById('status');
+        const status = document.getElementById('status');
+        const logs = ["Syncing Neural Nodes", "Parsing Local Data", "Rendering Visuals", "Finalizing Interface"];
 
-        let width = 0;
-        const interval = setInterval(() => {
-            width += Math.floor(Math.random() * 5) + 2;
-            if (width >= 100) {
-                width = 100;
-                clearInterval(interval);
-
+        let val = 0;
+        const speed = setInterval(() => {
+            val += Math.floor(Math.random() * 6) + 2;
+            if (val >= 100) {
+                val = 100;
+                clearInterval(speed);
                 setTimeout(() => {
                     preloader.classList.add('exit');
-                    hero.classList.add('reveal');
+                    hero.classList.add('active');
                 }, 800);
             }
-            bar.style.width = width + '%';
-            percent.innerText = width;
+            count.innerText = val;
+            bar.style.width = val + '%';
 
-            if (width > 80) statusText.innerText = statuses[3];
-            else if (width > 60) statusText.innerText = statuses[2];
-            else if (width > 30) statusText.innerText = statuses[1];
-        }, 60);
-
-        console.log("Wrapify Minimalist Edition Loaded.");
+            if (val > 80) status.innerText = logs[3];
+            else if (val > 60) status.innerText = logs[2];
+            else if (val > 30) status.innerText = logs[1];
+            else status.innerText = logs[0];
+        }, 50);
     </script>
 </body>
 
