@@ -74,148 +74,117 @@
             letter-spacing: -1px;
         }
 
-        /* --- High-End Preloader --- */
+        /* --- Total Premium Preloader --- */
         #preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #05070a;
+            background: #000;
             z-index: 10000;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: transform 1s cubic-bezier(0.85, 0, 0.15, 1), opacity 1s ease;
         }
 
         #preloader.fade-out {
-            transform: translateY(-100%);
+            transform: scale(1.2);
             opacity: 0;
+            pointer-events: none;
         }
 
-        .loader-content {
+        .loader-wrapper {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
         }
 
-        .loader-logo-wrap {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 40px;
+        /* Neural Pulse Circle */
+        .neural-circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            animation: neural-pulse 3s infinite ease-out;
         }
 
-        .loader-logo {
+        @keyframes neural-pulse {
+            0% {
+                transform: scale(0.5);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .loader-logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+        }
+
+        .loader-logo-img {
             width: 100%;
             height: 100%;
-            border-radius: 20px;
+            border-radius: 28px;
             object-fit: cover;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 0 30px rgba(37, 211, 102, 0.2);
-            animation: pulse-glow 2.5s infinite ease-in-out;
+            box-shadow: 0 0 50px rgba(37, 211, 102, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
-        .scan-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent-green);
-            box-shadow: 0 0 15px var(--accent-green);
-            z-index: 3;
-            animation: scan-move 2s infinite linear;
-            opacity: 0.8;
-        }
-
-        .loader-bar-wrap {
-            margin-top: 20px;
+        .loader-info {
+            margin-top: 50px;
             text-align: center;
         }
 
-        .loader-bar {
-            width: 250px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-            border-radius: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .loader-progress {
-            position: absolute;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--accent-green), var(--accent-blue), transparent);
-            animation: loading-strip 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .loading-text {
-            margin-top: 20px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 5px;
+        .loader-percentage {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
             color: white;
-            opacity: 0.6;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .loader-bar-bg {
+            width: 280px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-bar-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            box-shadow: 0 0 15px var(--accent-green);
+            transition: width 0.4s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .loader-status {
+            margin-top: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            color: var(--accent-green);
             text-transform: uppercase;
-            animation: text-flicker 2s infinite alternate;
-        }
-
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                transform: scale(0.95);
-                filter: brightness(0.8) drop-shadow(0 0 5px var(--accent-green));
-            }
-
-            50% {
-                transform: scale(1.05);
-                filter: brightness(1.2) drop-shadow(0 0 25px var(--accent-green));
-            }
-        }
-
-        @keyframes scan-move {
-            0% {
-                top: 0%;
-                opacity: 0;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                top: 100%;
-                opacity: 0;
-            }
-        }
-
-        @keyframes loading-strip {
-            0% {
-                left: -100%;
-            }
-
-            100% {
-                left: 100%;
-            }
-        }
-
-        @keyframes text-flicker {
-            0% {
-                opacity: 0.3;
-            }
-
-            100% {
-                opacity: 0.8;
-                color: var(--accent-green);
-            }
+            font-weight: 700;
+            opacity: 0.8;
         }
 
         .container {
@@ -767,16 +736,20 @@
 <body>
 
     <div id="preloader">
-        <div class="loader-content">
-            <div class="loader-logo-wrap">
-                <div class="scan-line"></div>
-                <img src="icon.jpg" alt="Logo" class="loader-logo">
+        <div class="loader-wrapper">
+            <div class="neural-circle"></div>
+            <div class="neural-circle" style="animation-delay: 1.5s"></div>
+
+            <div class="loader-logo-container">
+                <img src="icon.jpg" alt="Logo" class="loader-logo-img">
             </div>
-            <div class="loader-bar-wrap">
-                <div class="loader-bar">
-                    <div class="loader-progress"></div>
+
+            <div class="loader-info">
+                <span class="loader-percentage" id="loadPercentage">0</span>
+                <div class="loader-bar-bg">
+                    <div class="loader-bar-fill" id="loadBar"></div>
                 </div>
-                <p class="loading-text">Initializing Protocol</p>
+                <p class="loader-status" id="loadStatus">Initializing Neural Core</p>
             </div>
         </div>
     </div>
@@ -1017,18 +990,44 @@
             else header.classList.remove('scrolled');
         });
 
-        // Preloader Logic
+        // Ultra-Premium Preloader Engine
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             const body = document.body;
+            const barFill = document.getElementById('loadBar');
+            const percentText = document.getElementById('loadPercentage');
+            const statusText = document.getElementById('loadStatus');
 
-            // If user comes from loading.html, make it faster
-            const delay = document.referrer.includes('loading.html') ? 200 : 800;
+            const statusMessages = [
+                "Encrypting Sandbox",
+                "Parsing Neural Nodes",
+                "Finalizing Visuals",
+                "Ready for Reveal"
+            ];
 
-            setTimeout(() => {
-                preloader.classList.add('fade-out');
-                body.classList.add('loaded');
-            }, delay);
+            let count = 0;
+            const intv = setInterval(() => {
+                count += Math.floor(Math.random() * 5) + 2;
+                if (count >= 100) {
+                    count = 100;
+                    clearInterval(intv);
+
+                    setTimeout(() => {
+                        preloader.classList.add('fade-out');
+                        body.classList.add('loaded');
+                    }, 500);
+                }
+
+                barFill.style.width = count + '%';
+                percentText.innerText = count + '%';
+
+                // Update status messages periodically
+                if (count > 80) statusText.innerText = statusMessages[3];
+                else if (count > 60) statusText.innerText = statusMessages[2];
+                else if (count > 30) statusText.innerText = statusMessages[1];
+                else statusText.innerText = statusMessages[0];
+
+            }, 60);
         });
 
         // 3D Phone Tilt Interactive (Desktop Only)
