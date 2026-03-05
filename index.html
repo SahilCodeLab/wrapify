@@ -4,243 +4,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wrapify | The Masterpiece of Chat Analytics by SahilCodeLab</title>
+    <title>Wrapify — Redefining Digital Memories</title>
 
-    <!-- SEO & Metadata -->
+    <!-- Meta Tags -->
     <meta name="description"
-        content="Wrapify: The definitive private WhatsApp analytics engine. Local analysis, 3D visualizations, and beautiful 'Year Wrap' cards by SahilCodeLab.">
-    <meta name="keywords"
-        content="WhatsApp Chat Analyzer, Secure WhatsApp Wrapped, SahilCodeLab, 3D Chat Insights, Private Analytics">
+        content="Wrapify: The most private, premium WhatsApp analytics engine. Local analysis, cinematic visuals, and your year in review by SahilCodeLab.">
     <meta name="author" content="SahilCodeLab">
 
-    <!-- Fonts - Space Grotesk for Tech, Inter for Content -->
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Animations -->
+    <!-- AOS for Smooth Entrances -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
-            --bg-deep: #05070a;
-            --accent-green: #25D366;
-            /* WhatsApp Emerald */
-            --accent-blue: #0ea5e9;
-            /* SahilCodeLab Sapphire */
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-glow: 0 0 20px rgba(37, 211, 102, 0.4);
-            --blue-glow: 0 0 30px rgba(14, 165, 233, 0.2);
-            --transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            --card-br: 32px;
+            --bg: #000000;
+            --primary: #ffffff;
+            --accent: #00ff88;
+            /* Elite Emerald */
+            --muted: #86868b;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --ease: cubic-bezier(0.65, 0, 0.35, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            outline: none;
             -webkit-tap-highlight-color: transparent;
         }
 
-        html {
-            scroll-behavior: smooth;
-            scrollbar-gutter: stable;
-        }
-
+        html,
         body {
-            background-color: var(--bg-deep);
-            color: #f1f5f9;
+            background-color: var(--bg);
+            color: var(--primary);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
+            scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            opacity: 0;
-            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        body.loaded {
-            opacity: 1;
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 5px;
         }
 
-        h1,
-        h2,
-        h3 {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            letter-spacing: -1px;
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
         }
 
-        /* --- Total Premium Preloader --- */
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* --- Preloader: The Entry Protocol --- */
         #preloader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: #000;
             z-index: 10000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 1s cubic-bezier(0.85, 0, 0.15, 1), opacity 1s ease;
+            transition: transform 1.2s var(--ease), opacity 1s linear;
         }
 
-        #preloader.fade-out {
-            transform: scale(1.2);
+        .loader-content {
+            position: relative;
+            width: 300px;
+            text-align: center;
+        }
+
+        .loader-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 40px;
+            filter: grayscale(1);
+            opacity: 0.8;
+        }
+
+        .load-percentage {
+            font-size: 5rem;
+            font-weight: 100;
+            letter-spacing: -3px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .load-bar-container {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .load-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            transition: width 0.1s linear;
+        }
+
+        .load-status {
+            margin-top: 20px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        #preloader.exit {
+            transform: translateY(-100%);
             opacity: 0;
             pointer-events: none;
         }
 
-        .loader-wrapper {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Neural Pulse Circle */
-        .neural-circle {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 1px solid rgba(37, 211, 102, 0.2);
-            animation: neural-pulse 3s infinite ease-out;
-        }
-
-        @keyframes neural-pulse {
-            0% {
-                transform: scale(0.5);
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        .loader-logo-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            z-index: 2;
-        }
-
-        .loader-logo-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 28px;
-            object-fit: cover;
-            box-shadow: 0 0 50px rgba(37, 211, 102, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .loader-info {
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        .loader-percentage {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: white;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .loader-bar-bg {
-            width: 280px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loader-bar-fill {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-            box-shadow: 0 0 15px var(--accent-green);
-            transition: width 0.4s cubic-bezier(0.1, 0.8, 0.2, 1);
-        }
-
-        .loader-status {
-            margin-top: 15px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-            color: var(--accent-green);
-            text-transform: uppercase;
-            font-weight: 700;
-            opacity: 0.8;
-        }
-
+        /* --- Layout --- */
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 5%;
         }
 
-        /* --- Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 6px;
+        section {
+            padding: 160px 0;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--bg-deep);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-green);
-        }
-
-        /* --- Modern Background Layer --- */
-        .page-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(37, 211, 102, 0.05) 0%, transparent 40%);
-            z-index: -1;
-            background-image: url('final_bg.png');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* --- Header / Navigation --- */
+        /* --- Header --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 20px 0;
-            transition: var(--transition);
+            padding: 30px 0;
+            transition: all 0.5s var(--ease);
         }
 
         header.scrolled {
-            padding: 12px 0;
-            background: rgba(5, 7, 10, 0.8);
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--border);
         }
 
         .nav-inner {
@@ -250,21 +172,20 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-weight: 900;
+            font-size: 1.2rem;
             text-decoration: none;
             color: white;
-            font-size: 1.5rem;
-            font-weight: 900;
-            font-family: 'Outfit', sans-serif;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .logo img {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px var(--accent-green);
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
         }
 
         .nav-links {
@@ -275,386 +196,180 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #94a3b8;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
+            color: var(--muted);
+            font-size: 0.9rem;
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
             color: white;
-            text-shadow: 0 0 10px white;
         }
 
-        .btn-neon {
-            padding: 12px 28px;
-            background: linear-gradient(135deg, var(--accent-green) 0%, #1db954 100%);
-            color: #000;
-            border-radius: 50px;
-            font-weight: 800;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-neon:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 45px rgba(37, 211, 102, 0.6);
+        .btn-premium {
+            padding: 12px 30px;
             background: white;
+            color: black;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid white;
+            transition: 0.4s var(--ease);
         }
 
-        /* --- Hero Section - 3D Interactive --- */
+        .btn-premium:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* --- Hero --- */
         .hero {
-            padding-top: 200px;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
-            align-items: flex-start;
-            position: relative;
-        }
-
-        .hero-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
             align-items: center;
-            gap: 100px;
-        }
-
-        .hero-text h1 {
-            font-size: clamp(3.5rem, 8vw, 6.5rem);
-            line-height: 0.95;
-            margin-bottom: 30px;
-            background: linear-gradient(to right, #fff 50%, #64748b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-text p {
-            font-size: 1.35rem;
-            color: #94a3b8;
-            max-width: 600px;
-            margin-bottom: 50px;
-            font-weight: 400;
-        }
-
-        /* --- Phone Showcase 3D --- */
-        .mockup-3d {
-            position: relative;
-            transform-style: preserve-3d;
-            perspective: 2000px;
-            cursor: pointer;
-            width: 100%;
-            display: flex;
             justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
         }
 
-        .phone-wrapper {
-            position: relative;
-            width: 320px;
-            height: 660px;
-            transform: rotateY(-25deg) rotateX(15deg);
-            transition: transform 0.4s ease-out;
-            transform-style: preserve-3d;
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            letter-spacing: -5px;
+            line-height: 0.9;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1s var(--ease) 1.5s;
         }
 
-        @media (max-width: 768px) {
-            .phone-wrapper {
-                width: 280px;
-                height: 580px;
-                transform: rotateY(0) rotateX(0);
-            }
+        .hero.reveal h1 {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .phone-body {
-            position: absolute;
-            inset: 0;
-            background: #111;
-            border: 12px solid #222;
-            border-radius: 50px;
-            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.9), 0 0 30px rgba(37, 211, 102, 0.1);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            opacity: 0;
+            transition: 1s var(--ease) 1.8s;
         }
 
-        .phone-body img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .hero.reveal p {
+            opacity: 1;
         }
 
-        .mockup-3d::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 40px;
-            background: radial-gradient(ellipse at center, rgba(37, 211, 102, 0.2) 0%, transparent 70%);
-            filter: blur(10px);
-        }
-
-        /* --- Visual Wall (Large Grid for 10 Screenshots) --- */
+        /* --- Visual Showcase --- */
         .visual-wall {
-            padding: 100px 0;
-            background: rgba(5, 7, 10, 0.5);
+            background: #050505;
         }
 
         .wall-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            perspective: 1000px;
-        }
-
-        .wall-item {
-            aspect-ratio: 9/19;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-            transition: var(--transition);
-            transform: rotateY(10deg);
-            background: #111;
-        }
-
-        .wall-item:hover {
-            transform: rotateY(0deg) scale(1.1) translateZ(50px);
-            z-index: 10;
-            border-color: var(--accent-blue);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        .wall-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* --- Feature Highlights --- */
-        .section-padding {
-            padding: 160px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 100px;
-        }
-
-        .section-title span {
-            color: var(--accent-green);
-            text-transform: uppercase;
-            font-weight: 800;
-            letter-spacing: 4px;
-            font-size: 0.9rem;
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        .section-title h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 24px;
-        }
-
-        .f-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 40px;
         }
 
-        .f-card {
+        .wall-card {
             background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--card-br);
-            padding: 50px;
-            transition: var(--transition);
-            position: relative;
+            border: 1px solid var(--border);
+            border-radius: 20px;
             overflow: hidden;
+            aspect-ratio: 9/16;
+            transition: 0.6s var(--ease);
         }
 
-        .f-card:hover {
-            background: rgba(14, 165, 233, 0.05);
-            border-color: var(--accent-blue);
-            transform: translateY(-15px);
+        .wall-card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
         }
 
-        .f-card i {
-            font-size: 3rem;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .wall-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: 0.6s;
         }
 
-        .f-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+        .wall-card:hover img {
+            opacity: 1;
         }
 
-        .f-card p {
-            color: #94a3b8;
-            font-size: 1.1rem;
-        }
-
-        /* --- Trust Protocol --- */
-        .protocol {
-            background: linear-gradient(180deg, transparent, rgba(37, 211, 102, 0.02), transparent);
-        }
-
-        .protocol-flex {
-            display: flex;
-            align-items: center;
+        /* --- Features --- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 100px;
         }
 
-        .p-image {
-            flex: 1;
-            position: relative;
+        .feature-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: white;
         }
 
-        .p-image img {
-            width: 100%;
+        .feature-item p {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        /* --- Large Trust Section --- */
+        .trust-banner {
+            text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trust-banner h2 {
+            font-size: 4rem;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+        }
+
+        /* --- Privacy Focus --- */
+        .privacy-box {
+            background: white;
             border-radius: 40px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--glass-border);
+            padding: 100px;
+            color: black;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 80px;
         }
 
-        .p-content {
-            flex: 1.2;
+        .privacy-box h2 {
+            font-size: 3.5rem;
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+            color: black;
         }
 
-        .p-content li {
-            list-style: none;
-            display: flex;
-            gap: 20px;
+        .privacy-box p {
+            font-size: 1.2rem;
+            color: #555;
             margin-bottom: 40px;
         }
 
-        .p-content i {
-            font-size: 1.8rem;
-            color: var(--accent-green);
-        }
-
-        /* --- FAQ / Interactive --- */
-        .faq-box {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .faq-trigger {
-            padding: 30px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .faq-content {
-            max-height: 0;
-            padding: 0 30px;
-            color: #94a3b8;
-            transition: var(--transition);
-            overflow: hidden;
-        }
-
-        .faq-item.active {
-            border-color: var(--accent-blue);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .faq-item.active .faq-content {
-            max-height: 200px;
-            padding-bottom: 30px;
-        }
-
-        /* --- Massive CTA --- */
-        .final-cta {
-            padding: 200px 0;
-            text-align: center;
-            background: radial-gradient(circle at center, rgba(37, 211, 102, 0.05) 0%, transparent 70%);
-        }
-
-        .final-cta h2 {
-            font-size: 5rem;
-            margin-bottom: 50px;
-        }
-
-        /* --- Footer --- */
-        footer {
-            padding: 100px 0 50px;
-            background: #010203;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 100px;
-            margin-bottom: 80px;
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 40px;
-            border-top: 1px solid var(--glass-border);
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-
-        /* --- Mobile Responsiveness (Infinix Note 10 Optimization) --- */
-        @media (max-width: 1200px) {
-            .wall-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 15px;
-            }
-        }
-
+        /* --- Responsive --- */
         @media (max-width: 1024px) {
-            .hero-layout {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+            }
+
+            .wall-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .privacy-box {
                 grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text {
-                margin: 0 auto;
-            }
-
-            .hero-text p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .f-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .visual-wall {
-                padding: 60px 0;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
+                padding: 60px 40px;
             }
         }
 
@@ -663,71 +378,25 @@
                 display: none;
             }
 
-            .hero {
-                padding-top: 150px;
+            section {
+                padding: 100px 0;
             }
 
-            .hero-text h1 {
-                font-size: 2.8rem;
-                letter-spacing: -2px;
+            .hero h1 {
+                font-size: 4.5rem;
+                letter-spacing: -3px;
             }
 
-            .hero-text p {
-                font-size: 1.1rem;
+            .trust-banner h2 {
+                font-size: 2.5rem;
             }
 
-            .f-grid {
+            .feature-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .visual-wall {
-                overflow-x: auto;
-                width: 100%;
             }
 
             .wall-grid {
-                display: flex;
-                width: max-content;
-                padding: 20px 5%;
-                gap: 15px;
-            }
-
-            .wall-item {
-                width: 220px;
-                flex-shrink: 0;
-                transform: none;
-            }
-
-            .protocol-flex {
-                flex-direction: column;
-                text-align: center;
-                gap: 40px;
-            }
-
-            .final-cta h2 {
-                font-size: 2.5rem;
-                line-height: 1.2;
-            }
-
-            .footer-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .logo {
-                justify-content: center;
-            }
-
-            .btn-neon {
-                padding: 14px 40px;
-                width: 100%;
-                justify-content: center;
             }
         }
     </style>
@@ -735,244 +404,128 @@
 
 <body>
 
+    <!-- Minimalist Preloader -->
     <div id="preloader">
-        <div class="loader-wrapper">
-            <div class="neural-circle"></div>
-            <div class="neural-circle" style="animation-delay: 1.5s"></div>
-
-            <div class="loader-logo-container">
-                <img src="icon.jpg" alt="Logo" class="loader-logo-img">
+        <div class="loader-content">
+            <img src="icon.jpg" alt="Logo" class="loader-logo">
+            <div class="load-percentage" id="percent">0</div>
+            <div class="load-bar-container">
+                <div class="load-bar-fill" id="bar"></div>
             </div>
-
-            <div class="loader-info">
-                <span class="loader-percentage" id="loadPercentage">0</span>
-                <div class="loader-bar-bg">
-                    <div class="loader-bar-fill" id="loadBar"></div>
-                </div>
-                <p class="loader-status" id="loadStatus">Initializing Neural Core</p>
-            </div>
+            <p class="load-status" id="status">Syncing Intelligence</p>
         </div>
     </div>
 
-    <div class="page-bg"></div>
-
+    <!-- Header -->
     <header id="header">
         <div class="container">
             <div class="nav-inner">
                 <a href="#" class="logo">
-                    <img src="icon.jpg" alt="Wrapify Logo">
-                    <span>Wrapify</span>
+                    <img src="icon.jpg" alt="Icon">
+                    WRAPIFY
                 </a>
                 <ul class="nav-links">
-                    <li><a href="#how">Genesis</a></li>
-                    <li><a href="#visuals">Visuals</a></li>
-                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">Genesis</a></li>
+                    <li><a href="#showcase">Showcase</a></li>
                     <li><a href="#privacy">Privacy</a></li>
                 </ul>
-                <a href="app-release.apk" class="btn-neon">Download APK</a>
+                <a href="app-release.apk" class="btn-premium">DOWNLOAD</a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-layout">
-                <div class="hero-text" data-aos="fade-right">
-                    <h1>Your Chats, <br> <span
-                            style="background: linear-gradient(135deg, var(--accent-green), var(--accent-blue)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Redefined.</span>
-                    </h1>
-                    <p>Unwrap the hidden visual signatures of your WhatsApp conversations. Secure, 3D animated insights,
-                        and local-only logic by <strong>SahilCodeLab</strong>.</p>
-                    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                        <a href="app-release.apk" class="btn-neon">Get Wrapify v2.0 <i
-                                class="fa-solid fa-download"></i></a>
-                        <span style="font-size: 0.9rem; color: #64748b; display: flex; align-items: center; gap: 8px;">
-                            <i class="fa-solid fa-shield-virus" style="color: var(--accent-green)"></i> 100% Secure &
-                            Offline
-                        </span>
-                    </div>
-                </div>
-
-                <div class="mockup-3d" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="phone-wrapper" id="floatingPhone">
-                        <div class="phone-body">
-                            <img src="Slice 1.jpg" alt="Wrapify 3D Preview">
-                        </div>
-                    </div>
-                </div>
+        <div class="container" id="heroContainer">
+            <h1 data-aos="fade-up">The Future <br> of Memories.</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Cinematic chat analytics for the modern individual. Secure by
+                design. Aesthetic by choice.</p>
+            <div data-aos="fade-up" data-aos-delay="400">
+                <a href="app-release.apk" class="btn-premium" style="padding: 18px 50px; font-size: 1.1rem;">GET WRAPIFY
+                    v2.0</a>
             </div>
         </div>
     </section>
 
-    <!-- Visual Wall - Using All 10 Slices -->
-    <section class="visual-wall" id="visuals">
+    <!-- Showcase Wall -->
+    <section class="visual-wall" id="showcase">
         <div class="container">
-            <div class="section-title">
-                <span>The Visual Protocol</span>
-                <h2>One Interface. Infinite Details.</h2>
+            <div style="margin-bottom: 100px; text-align: center;">
+                <p style="color: var(--accent); font-weight: 700; letter-spacing: 5px; margin-bottom: 20px;">GALLERY</p>
+                <h2 style="font-size: 3rem; letter-spacing: -2px;">Visual excellence in every pixel.</h2>
             </div>
             <div class="wall-grid">
-                <div class="wall-item" data-aos="fade-up"><img src="Slice 1.jpg" alt="Detail 1" loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="100"><img src="Slice 4.jpg" alt="Detail 4"
-                        loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="200"><img src="Slice 5.jpg" alt="Detail 5"
-                        loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="300"><img src="Slice 6.jpg" alt="Detail 6"
-                        loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="400"><img src="Slice 7.jpg" alt="Detail 7"
-                        loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="500"><img src="Slice 8.jpg" alt="Detail 8"
-                        loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="600"><img src="Slice 9.jpg" alt="Detail 9"
-                        loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="700"><img src="Slice 10.jpg" alt="Detail 10"
-                        loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="800"><img src="Slice 2.jpg" alt="Detail 2"
-                        loading="lazy"></div>
-                <div class="wall-item" data-aos="fade-up" data-aos-delay="900"><img src="Slice 3.jpg" alt="Detail 3"
-                        loading="lazy"></div>
+                <div class="wall-card" data-aos="fade-up">
+                    <img src="Slice 1.jpg" alt="Showcase 1">
+                </div>
+                <div class="wall-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="Slice 4.jpg" alt="Showcase 2">
+                </div>
+                <div class="wall-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="Slice 7.jpg" alt="Showcase 3">
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features -->
-    <section class="section-padding" id="features">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <span>Sophisticated Logic</span>
-                <h2>Engineered for Brilliance.</h2>
+    <section class="container" id="about">
+        <div class="feature-grid">
+            <div class="feature-item" data-aos="fade-up">
+                <h3>01. Neural Logic</h3>
+                <p>Advanced parsing algorithms that understand conversational nuances, creating the most accurate
+                    portrait of your relationships.</p>
             </div>
-            <div class="f-grid">
-                <div class="f-card" data-aos="fade-up">
-                    <i class="fa-solid fa-cube"></i>
-                    <h3>3D Insights</h3>
-                    <p>Experience your chat data in a multi-dimensional dashboard that makes numbers feel like art.</p>
-                </div>
-                <div class="f-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fa-solid fa-user-shield"></i>
-                    <h3>Neural Privacy</h3>
-                    <p>Our local engine parses your history without ever connecting to a server. Zero data leaves your
-                        device.</p>
-                </div>
-                <div class="f-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <h3>Stunning Visuals</h3>
-                    <p>Generate high-resolution 'Wrapped' cards and charts instantly, optimized for sharing on any
-                        social platform.</p>
-                </div>
+            <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                <h3>02. Local Vault</h3>
+                <p>Data sovereignty is our priority. Every byte of your chat history is processed locally on your
+                    hardware. Zero cloud risk.</p>
+            </div>
+            <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                <h3>03. Art of Data</h3>
+                <p>Why settle for boring stats? Wrapify transforms raw data into high-end visual cards ready for the
+                    world to see.</p>
             </div>
         </div>
     </section>
 
-    <!-- How it Works Interactive -->
-    <section class="section-padding" id="how">
-        <div class="container">
-            <div class="protocol-flex">
-                <div class="p-image" data-aos="fade-right">
-                    <img src="Slice 3.jpg" alt="Process View">
-                </div>
-                <div class="p-content" data-aos="fade-left">
-                    <div class="section-title" style="text-align: left; margin-bottom: 50px;">
-                        <span>The Genesis Path</span>
-                        <h2>Three Steps to Insight.</h2>
-                    </div>
-                    <li>
-                        <i class="fa-solid fa-file-export"></i>
-                        <div>
-                            <h4>01. Export Protocol</h4>
-                            <p>Initiate 'Export Chat' from WhatsApp (without media). The .txt file is your secure key.
-                            </p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-file-import"></i>
-                        <div>
-                            <h4>02. Local Import</h4>
-                            <p>Select the file in Wrapify. Watch as the local engine builds your neural profile in
-                                milliseconds.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-sparkles"></i>
-                        <div>
-                            <h4>03. Reveal Excellence</h4>
-                            <p>Enjoy your Busiest Hours, Top Emojis, and most used phrases in a beautiful visual
-                                ecosystem.</p>
-                        </div>
-                    </li>
-                </div>
+    <!-- Privacy Protocol -->
+    <section class="container" id="privacy">
+        <div class="privacy-box" data-aos="zoom-in">
+            <div>
+                <h2>Your Privacy, <br> Built-In.</h2>
+                <p>We designed Wrapify to be a fortress. No trackers, no profiles, and absolutely no data collection.
+                    Just pure, private insights.</p>
+                <a href="privacy.html" class="btn-premium" style="background: black; color: white;">READ SECURITY
+                    PROTOCOL</a>
             </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section-padding" id="privacy">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <span>Verification</span>
-                <h2>Frequently Inquired.</h2>
-            </div>
-            <div class="faq-box">
-                <div class="faq-item" data-aos="fade-up">
-                    <div class="faq-trigger">Is my chat data uploaded? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-content">No. Wrapify is built with a strictly local architecture. There are no
-                        server-side components. Your data stays in your RAM, and is wiped on exit.</div>
-                </div>
-                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="faq-trigger">Why choose SahilCodeLab? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-content">We specialize in premium utility tools that prioritize user privacy and
-                        high-end design. Wrapify is our flagship project for 2026.</div>
-                </div>
-                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="faq-trigger">Does it work on all Androids? <i class="fa-solid fa-plus"></i></div>
-                    <div class="faq-content">Yes, Wrapify is optimized for Android 6.0 and above, with special rendering
-                        engine upgrades for modern high-refresh screens.</div>
-                </div>
+            <div style="text-align: right;">
+                <i class="fa-solid fa-shield-halved" style="font-size: 12rem; color: #000; opacity: 0.05;"></i>
             </div>
         </div>
     </section>
 
     <!-- Final CTA -->
-    <section class="final-cta">
+    <section class="trust-banner">
         <div class="container">
-            <div data-aos="zoom-in">
-                <h2 style="font-weight: 900;">Ready to <span style="color: var(--accent-green)">Unwrap?</span></h2>
-                <a href="app-release.apk" class="btn-neon" style="padding: 24px 70px; font-size: 1.4rem;">Download
-                    Wrapify APK</a>
-                <p style="margin-top: 40px; color: #64748b;">Join the evolution of chat analytics by SahilCodeLab.</p>
+            <h2 data-aos="fade-up">Developed by SahilCodeLab.</h2>
+            <p style="color: var(--muted); margin-bottom: 60px;">Innovating privacy-first digital architecture from
+                India.</p>
+            <div data-aos="zoom-in" data-aos-delay="200">
+                <a href="app-release.apk" class="btn-premium">DOWNLOAD APK</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <a href="#" class="logo" style="margin-bottom: 30px; font-size: 2rem;">
-                        <img src="icon.jpg" alt="Icon">
-                        <span>Wrapify</span>
-                    </a>
-                    <p style="color: #64748b; max-width: 400px;">A project dedicated to the beauty of data and the
-                        sanctity of privacy. Innovated in India by SahilCodeLab.</p>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 20px;">
-                    <h4 style="color: white;">Navigation</h4>
-                    <a href="#how" style="color: #64748b; text-decoration: none;">Genesis</a>
-                    <a href="#visuals" style="color: #64748b; text-decoration: none;">Visual Wall</a>
-                    <a href="privacy.html" style="color: #64748b; text-decoration: none;">Privacy Protocol</a>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 20px;">
-                    <h4 style="color: white;">Social</h4>
-                    <a href="#" style="color: #64748b; text-decoration: none;">GitHub</a>
-                    <a href="#" style="color: #64748b; text-decoration: none;">Instagram</a>
-                    <a href="#" style="color: #64748b; text-decoration: none;">X / Twitter</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 SahilCodeLab. Distributed by India Labs.</p>
-                <p>Build 2.0.4 - Premium Edition</p>
+    <footer style="padding: 100px 0; border-top: 1px solid var(--border);">
+        <div class="container"
+            style="display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.8rem;">
+            <p>&copy; 2026 SahilCodeLab. Premium Distributed Edition.</p>
+            <div style="display: flex; gap: 30px;">
+                <a href="#" style="color: var(--muted); text-decoration: none;">GitHub</a>
+                <a href="#" style="color: var(--muted); text-decoration: none;">X / Twitter</a>
+                <a href="privacy.html" style="color: var(--muted); text-decoration: none;">Privacy</a>
             </div>
         </div>
     </footer>
@@ -981,77 +534,44 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Init AOS
-        AOS.init({ duration: 1000, once: true, offset: 100 });
+        AOS.init({ duration: 1000, once: true, offset: 50 });
 
-        // Header Scroll
+        // Header Effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         });
 
-        // Ultra-Premium Preloader Engine
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            const body = document.body;
-            const barFill = document.getElementById('loadBar');
-            const percentText = document.getElementById('loadPercentage');
-            const statusText = document.getElementById('loadStatus');
+        // Preloader Logic
+        const percent = document.getElementById('percent');
+        const bar = document.getElementById('bar');
+        const preloader = document.getElementById('preloader');
+        const hero = document.getElementById('home');
+        const statuses = ["Syncing", "Parsing", "Encrypting", "Almost There"];
+        const statusText = document.getElementById('status');
 
-            const statusMessages = [
-                "Encrypting Sandbox",
-                "Parsing Neural Nodes",
-                "Finalizing Visuals",
-                "Ready for Reveal"
-            ];
+        let width = 0;
+        const interval = setInterval(() => {
+            width += Math.floor(Math.random() * 5) + 2;
+            if (width >= 100) {
+                width = 100;
+                clearInterval(interval);
 
-            let count = 0;
-            const intv = setInterval(() => {
-                count += Math.floor(Math.random() * 5) + 2;
-                if (count >= 100) {
-                    count = 100;
-                    clearInterval(intv);
+                setTimeout(() => {
+                    preloader.classList.add('exit');
+                    hero.classList.add('reveal');
+                }, 800);
+            }
+            bar.style.width = width + '%';
+            percent.innerText = width;
 
-                    setTimeout(() => {
-                        preloader.classList.add('fade-out');
-                        body.classList.add('loaded');
-                    }, 500);
-                }
+            if (width > 80) statusText.innerText = statuses[3];
+            else if (width > 60) statusText.innerText = statuses[2];
+            else if (width > 30) statusText.innerText = statuses[1];
+        }, 60);
 
-                barFill.style.width = count + '%';
-                percentText.innerText = count + '%';
-
-                // Update status messages periodically
-                if (count > 80) statusText.innerText = statusMessages[3];
-                else if (count > 60) statusText.innerText = statusMessages[2];
-                else if (count > 30) statusText.innerText = statusMessages[1];
-                else statusText.innerText = statusMessages[0];
-
-            }, 60);
-        });
-
-        // 3D Phone Tilt Interactive (Desktop Only)
-        if (window.innerWidth > 1024) {
-            const phone = document.getElementById('floatingPhone');
-            document.addEventListener('mousemove', (e) => {
-                const x = (window.innerWidth / 2 - e.pageX) / 40;
-                const y = (window.innerHeight / 2 - e.pageY) / 40;
-                phone.style.transform = `rotateY(${x - 25}deg) rotateX(${y + 15}deg)`;
-            });
-        }
-
-        // FAQ Toggle
-        document.querySelectorAll('.faq-trigger').forEach(trigger => {
-            trigger.addEventListener('click', () => {
-                const item = trigger.parentElement;
-                item.classList.toggle('active');
-                const icon = trigger.querySelector('i');
-                icon.classList.toggle('fa-plus');
-                icon.classList.toggle('fa-minus');
-            });
-        });
-
-        console.log("Wrapify Fin Edition Loaded.");
+        console.log("Wrapify Minimalist Edition Loaded.");
     </script>
 </body>
 
