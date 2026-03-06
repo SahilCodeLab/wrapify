@@ -34,6 +34,8 @@ html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: var(--primary) var(--bg-deep);
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -41,8 +43,18 @@ body {
     color: #f8fafc;
     font-family: var(--font-body);
     overflow-x: hidden;
+    width: 100%;
+    position: relative;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+}
+
+img,
+video,
+iframe,
+canvas {
+    max-width: 100%;
+    height: auto;
 }
 
 /* --- Custom Scrollbar --- */
@@ -69,6 +81,7 @@ body {
     max-width: 1300px;
     margin: 0 auto;
     padding: 0 24px;
+    width: 100%;
 }
 
 .text-gradient {
@@ -449,6 +462,7 @@ header.scrolled .nav-container {
     display: flex;
     gap: 16px;
     margin-top: 32px;
+    flex-wrap: wrap;
 }
 
 .badge {
@@ -595,6 +609,18 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .container {
+        padding: 0 16px;
+    }
+
+    .nav-container {
+        padding: 10px 16px;
+    }
+
+    header.scrolled .nav-container {
+        padding: 10px 16px;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -631,6 +657,15 @@ footer {
         height: 30px;
     }
 
+    .privacy-content {
+        padding: 30px 20px;
+        gap: 40px;
+    }
+
+    .privacy-badges {
+        justify-content: center;
+    }
+
     .hero-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -654,6 +689,17 @@ footer {
         height: auto;
         aspect-ratio: 9/19;
         margin: 0 auto;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+    }
+
+    .badge {
+        width: 100%;
+        justify-content: center;
     }
 }
 
