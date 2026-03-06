@@ -117,7 +117,8 @@ header.scrolled .nav-container {
     border: 1px solid var(--border-glass);
     border-top: none;
     border-radius: 0 0 32px 32px;
-    padding: 15px 40px;
+    padding: 12px 24px;
+    /* Matches original padding to prevent shift */
 }
 
 .logo {
@@ -256,6 +257,15 @@ header.scrolled .nav-container {
     text-decoration: none;
     transition: var(--transition-smooth);
     font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-cta-massive {
+    padding: 24px 60px;
+    font-size: 1.2rem;
 }
 
 .btn-primary {
@@ -363,9 +373,12 @@ header.scrolled .nav-container {
     margin-bottom: 16px;
 }
 
-.feature-card p {
-    color: #94a3b8;
-    font-weight: 300;
+.massive-heading {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    line-height: 1.1;
 }
 
 /* --- Gallery & Showcase --- */
@@ -588,6 +601,17 @@ footer {
         flex-direction: column;
         gap: 20px;
         text-align: center;
+    }
+
+    .massive-heading {
+        font-size: 2.5rem;
+        letter-spacing: -1px;
+    }
+
+    .btn-premium {
+        width: 100%;
+        padding: 16px 20px;
+        font-size: 0.95rem;
     }
 
     .mockup-container {
