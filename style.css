@@ -598,7 +598,9 @@ footer {
     }
 
     .hero h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        word-wrap: break-word;
+        hyphens: auto;
     }
 
     .features-grid {
@@ -633,8 +635,9 @@ footer {
     }
 
     .massive-heading {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         letter-spacing: -1px;
+        word-wrap: break-word;
     }
 
     .btn-premium {
