@@ -5,752 +5,197 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wrapify — Cinematic Chat Analytics by SahilCodeLab</title>
-
-    <!-- Premium Assets -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap"
-        rel="stylesheet">
+    <meta name="description"
+        content="Turn your WhatsApp conversations into cinematic insights. 100% offline, privacy-first analytics by SahilCodeLab.">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <style>
-        :root {
-            /* Eye Comfort Palette */
-            --bg: #0a0a0c;
-            --surface: #121216;
-            --emerald: #25D366;
-            --sapphire: #0ea5e9;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
-            --glass: rgba(255, 255, 255, 0.03);
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- Custom Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #222;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--emerald);
-        }
-
-        /* --- Professional Preloader --- */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            background: var(--bg);
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s ease, visibility 1s ease;
-        }
-
-        #preloader.fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-box {
-            text-align: center;
-            width: 300px;
-        }
-
-        .loader-percent {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-            color: white;
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        .loader-bar-bg {
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loader-bar-fill {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--emerald), var(--sapphire));
-            transition: width 0.1s linear;
-        }
-
-        .loader-status {
-            margin-top: 20px;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: var(--text-muted);
-            font-weight: 700;
-        }
-
-        /* --- Header --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 25px 0;
-            transition: var(--transition);
-        }
-
-        header.scrolled {
-            padding: 15px 0;
-            background: rgba(10, 10, 12, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            text-decoration: none;
-            color: white;
-            letter-spacing: -1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: var(--emerald);
-        }
-
-        .logo img {
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.2);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: white;
-        }
-
-        .btn-lux {
-            padding: 12px 30px;
-            background: white;
-            color: black;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: var(--transition);
-            border: 1px solid white;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-lux:hover {
-            background: transparent;
-            color: white;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: black;
-            border-color: white;
-        }
-
-        /* --- Sections --- */
-        section {
-            padding: 140px 0;
-        }
-
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        .tag {
-            color: var(--emerald);
-            font-weight: 800;
-            font-size: 0.8rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 25px;
-        }
-
-        /* --- Hero --- */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 100px;
-            background: radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 40%);
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            line-height: 0.95;
-            font-weight: 900;
-            margin-bottom: 30px;
-            letter-spacing: -3px;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
-
-        .hero-img {
-            position: relative;
-        }
-
-        .hero-img img {
-            width: 100%;
-            border-radius: 40px;
-            border: 1px solid var(--border);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-        }
-
-        /* --- Problem vs Solution --- */
-        .comparison {
-            background: var(--surface);
-        }
-
-        .comp-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-        }
-
-        .comp-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 60px;
-            border-radius: 40px;
-            transition: var(--transition);
-        }
-
-        .comp-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--emerald);
-        }
-
-        .comp-card i {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-        }
-
-        .comp-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .comp-card p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* --- Visual Wall (10 Slices) --- */
-        .gallery-title {
-            text-align: center;
-            margin-bottom: 100px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-        }
-
-        @media (max-width: 1200px) {
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-        }
-
-        .gallery-item {
-            aspect-ratio: 9/19;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: 0.6s var(--ease);
-            background: #111;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-            z-index: 10;
-            border-color: var(--sapphire);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-            transition: 0.6s;
-        }
-
-        .gallery-item:hover img {
-            opacity: 1;
-        }
-
-        /* --- Trust & Features --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 50px;
-        }
-
-        .f-item {
-            padding: 40px;
-            background: var(--glass);
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .f-item i {
-            font-size: 2.5rem;
-            color: var(--emerald);
-            margin-bottom: 25px;
-        }
-
-        .f-item h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .f-item p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        /* --- Massive Footer --- */
-        footer {
-            padding: 100px 0 50px;
-            background: #050507;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 60px;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--border);
-            padding-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            transition: 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        /* --- Responsive Optimization --- */
-        @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-img {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-
-            .comp-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            section {
-                padding: 80px 0;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-                letter-spacing: -2px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- Professional Preloader -->
-    <div id="preloader">
-        <div class="loader-box">
-            <span class="loader-percent" id="count">0</span>
-            <div class="loader-bar-bg">
-                <div class="loader-bar-fill" id="bar"></div>
-            </div>
-            <p class="loader-status" id="status">INITIALIZING SYSTEM</p>
-        </div>
-    </div>
-
     <header id="header">
-        <div class="nav-inner">
+        <div class="nav-container">
             <a href="#" class="logo">
-                <img src="icon.jpg" alt="Icon">
+                <img src="icon.jpg" alt="Wrapify Icon">
                 WRAPIFY<span>.</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#problem">Insights</a></li>
-                <li><a href="#gallery">Showcase</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#showcase">Showcase</a></li>
+                <li><a href="#privacy">Protocol</a></li>
                 <li><a href="privacy.html">Security</a></li>
             </ul>
-            <a href="app-release.apk" class="btn-lux">DOWNLOAD APK</a>
+            <a href="app-release.apk" class="btn-download">
+                <i class="fa-solid fa-download"></i>
+                Get v2.0
+            </a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-grid">
-                <div data-aos="fade-right">
-                    <span class="tag">Next-Gen Analytics</span>
-                    <h1>Your Digital <br> Memories, <br> <span
-                            style="background: linear-gradient(to right, var(--emerald), var(--sapphire)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">In
-                            High Fidelity.</span></h1>
-                    <p>Experience your WhatsApp history through a cinematic lens. Deep insights, 3D visualizations, and
-                        absolute privacy by SahilCodeLab.</p>
-                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                        <a href="app-release.apk" class="btn-lux"
-                            style="background: var(--emerald); border-color: var(--emerald);">Get Wrapify v2.0 <i
-                                class="fa-solid fa-arrow-right"></i></a>
-                        <a href="#problem" class="btn-lux btn-outline">Learn the Mission</a>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-content" data-aos="fade-right">
+                    <span class="hero-tag">Handcrafted in India Labs</span>
+                    <h1>Your Chats, <br> <span class="text-gradient">Redefined.</span></h1>
+                    <p>Experience your digital memories through a cinematic lens. Deep behavioral insights, 3D
+                        visualizations, and absolute privacy.</p>
+                    <div class="hero-btns">
+                        <a href="app-release.apk" class="btn-premium btn-primary">Download APK (60MB)</a>
+                        <a href="#features" class="btn-premium btn-secondary">Explore Features</a>
                     </div>
                 </div>
-                <div class="hero-img" data-aos="zoom-in" data-aos-delay="400">
-                    <img src="Slice 1.jpg" alt="Wrapify Dashboard Preview">
+                <div class="hero-image" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="mockup-container">
+                        <img src="Slice 1.jpg" alt="Wrapify Preview">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Problem vs Solution -->
-    <section class="comparison" id="problem">
-        <div class="container text-center">
-            <div style="text-align: center; margin-bottom: 80px;">
-                <span class="tag">The Core Mission</span>
-                <h2 style="font-family: 'Montserrat', sans-serif; font-size: 3.5rem; letter-spacing: -2px;">The Standard
-                    of Trust.</h2>
-            </div>
-            <div class="comp-grid">
-                <div class="comp-card" data-aos="fade-up">
-                    <i class="fa-solid fa-lock-open" style="color: #ef4444;"></i>
-                    <h3>The Problem</h3>
-                    <p>Current chat analyzers are cluttered with ads, require cloud uploads, and offer generic, boring
-                        statistics. Your private conversations should not be a commodity for big-tech servers.</p>
+        <!-- Features Grid -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Advanced Analytics.</h2>
+                    <p>Proprietary neural logic that turns raw text into stunning visual storytelling.</p>
                 </div>
-                <div class="comp-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fa-solid fa-shield-halved" style="color: var(--emerald);"></i>
-                    <h3>The Solution</h3>
-                    <p>Wrapify is a fortress. 100% offline neural parsing, locally generated cinematic visuals, and a
-                        zero-collection policy. We turn your data into art, not into profits.</p>
+                <div class="features-grid">
+                    <div class="feature-card glass-card" data-aos="fade-up">
+                        <div class="feature-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <h3>Neural Parsing</h3>
+                        <p>Locally analyzes message patterns, sentiment, and peak activity hours without cloud latency.
+                        </p>
+                    </div>
+                    <div class="feature-card glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon"><i class="fa-solid fa-vault"></i></div>
+                        <h3>Fortress Privacy</h3>
+                        <p>100% Offline execution. Your data stays in the device sandbox. Airplane mode compatible.</p>
+                    </div>
+                    <div class="feature-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon"><i class="fa-solid fa-palette"></i></div>
+                        <h3>Cinematic UI</h3>
+                        <p>Luxurious glassmorphism and fluid animations designed for the modern aesthetic.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Visual Showcase - Using All 10 Slices -->
-    <section id="gallery">
-        <div class="container">
-            <div class="gallery-title" data-aos="fade-up">
-                <span class="tag">Visual Excellence</span>
-                <h2 style="font-family: 'Montserrat', sans-serif; font-size: 3rem; letter-spacing: -2px;">A Masterpiece
-                    in Every Detail.</h2>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item" data-aos="fade-up"><img src="Slice 1.jpg" alt="Detail 1"></div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100"><img src="Slice 2.jpg" alt="Detail 2">
+        <!-- Showcase Gallery -->
+        <section class="showcase" id="showcase">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Visual Mastery.</h2>
+                    <p>A deep dive into the high-fidelity interface of Wrapify.</p>
                 </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200"><img src="Slice 3.jpg" alt="Detail 3">
-                </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300"><img src="Slice 4.jpg" alt="Detail 4">
-                </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400"><img src="Slice 5.jpg" alt="Detail 5">
-                </div>
-                <div class="gallery-item" data-aos="fade-up"><img src="Slice 6.jpg" alt="Detail 6"></div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100"><img src="Slice 7.jpg" alt="Detail 7">
-                </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200"><img src="Slice 8.jpg" alt="Detail 8">
-                </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300"><img src="Slice 9.jpg" alt="Detail 9">
-                </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400"><img src="Slice 10.jpg"
-                        alt="Detail 10"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trust Factors -->
-    <section class="comparison" id="about">
-        <div class="container">
-            <div class="features-grid">
-                <div class="f-item" data-aos="fade-up">
-                    <i class="fa-solid fa-microchip"></i>
-                    <h4>Neural Logic</h4>
-                    <p>Proprietary local algorithms that parse your history into cinematic insights instantly.</p>
-                </div>
-                <div class="f-item" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fa-solid fa-user-shield"></i>
-                    <h4>Offline-Centric</h4>
-                    <p>Designed to function flawlessly without internet. Your data never leaves your device sandbox.</p>
-                </div>
-                <div class="f-item" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fa-solid fa-palette"></i>
-                    <h4>Premium UI</h4>
-                    <p>Luxurious glassmorphism and Montserrat typography for the modern digital individual.</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-aos="fade-up"><img src="Slice 1.jpg" alt="Showcase 1"></div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="50"><img src="Slice 2.jpg"
+                            alt="Showcase 2"></div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100"><img src="Slice 3.jpg"
+                            alt="Showcase 3"></div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="150"><img src="Slice 4.jpg"
+                            alt="Showcase 4"></div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200"><img src="Slice 5.jpg"
+                            alt="Showcase 5"></div>
+                    <div class="gallery-item" data-aos="fade-up"><img src="Slice 6.jpg" alt="Showcase 6"></div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="50"><img src="Slice 7.jpg"
+                            alt="Showcase 7"></div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100"><img src="Slice 8.jpg"
+                            alt="Showcase 8"></div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="150"><img src="Slice 9.jpg"
+                            alt="Showcase 9"></div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200"><img src="Slice 10.jpg"
+                            alt="Showcase 10"></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Final CTA Area -->
-    <section style="text-align: center; padding: 200px 0;">
-        <div class="container" data-aos="zoom-in">
-            <h2
-                style="font-family: 'Montserrat', sans-serif; font-size: 4.5rem; font-weight: 900; letter-spacing: -3px; line-height: 1;">
-                Ready to Unwrap?</h2>
-            <p style="color: var(--text-muted); font-size: 1.4rem; margin: 40px auto 60px; max-width: 700px;">Join
-                thousands of others who trust SahilCodeLab for their digital analytics.</p>
-            <a href="app-release.apk" class="btn-lux"
-                style="padding: 24px 80px; font-size: 1.4rem; background: var(--emerald); border-color: var(--emerald);">Download
-                Now (APK)</a>
-        </div>
-    </section>
+        <!-- Privacy Protocol -->
+        <section class="privacy-strip" id="privacy">
+            <div class="container">
+                <div class="privacy-content glass-card" data-aos="zoom-in">
+                    <div class="privacy-text">
+                        <span class="hero-tag">Security First</span>
+                        <h2>Zero Cloud. <br> Zero Tracking.</h2>
+                        <p>Wrapify is built on the principle of Absolute Localism. We do not use servers, trackers, or
+                            accounts. Your memories are yours to keep.</p>
+                        <div class="privacy-badges">
+                            <span class="badge"><i class="fa-solid fa-plane"></i> Offline Ready</span>
+                            <span class="badge"><i class="fa-solid fa-fingerprint"></i> No Accounts</span>
+                            <span class="badge"><i class="fa-solid fa-user-secret"></i> Zero Logs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Footer -->
+        <!-- Final Call to Action -->
+        <section style="padding: 160px 0; text-align: center;">
+            <div class="container" data-aos="fade-up">
+                <h2 style="font-family: 'Outfit'; font-size: 4rem; letter-spacing: -2px; margin-bottom: 24px;">Unwrap
+                    Your World.</h2>
+                <p style="color: #94a3b8; font-size: 1.25rem; margin-bottom: 48px;">Join thousands of users enjoying
+                    cinema-grade analytics.</p>
+                <a href="app-release.apk" class="btn-premium btn-primary"
+                    style="padding: 24px 60px; font-size: 1.2rem;">Download for Android</a>
+            </div>
+        </section>
+    </main>
+
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div>
-                    <a href="#" class="logo" style="margin-bottom: 30px; font-size: 2rem;">
-                        <img src="icon.jpg" alt="Logo">
+                <div class="footer-brand">
+                    <a href="#" class="logo" style="font-size: 2rem;">
+                        <img src="icon.jpg" alt="Wrapify">
                         WRAPIFY<span>.</span>
                     </a>
-                    <p style="color: var(--text-muted); max-width: 400px; line-height: 1.8;">Innovating privacy-first
-                        digital architecture. Handcrafted with passion in India by <strong>SahilCodeLab</strong>.</p>
+                    <p>Designed and programmed in India by SahilCodeLab. Engineering privacy-centric digital
+                        architecture.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
                 </div>
-                <div>
-                    <h5 style="color: white; margin-bottom: 30px; font-size: 1.2rem;">Sitemap</h5>
-                    <ul class="footer-links">
+                <div class="footer-column">
+                    <h4>Ecosystem</h4>
+                    <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#problem">Insights</a></li>
-                        <li><a href="#gallery">Showcase</a></li>
-                        <li><a href="privacy.html">Privacy Protocol</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#showcase">Showcase</a></li>
+                        <li><a href="app-release.apk">Download</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h5 style="color: white; margin-bottom: 30px; font-size: 1.2rem;">Connect</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Twitter/X</a></li>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Data Protocol</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="mailto:contact@sahilcodelab.com">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Security Audit</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 SahilCodeLab. Distributed by India Labs. All Rights Reserved.</p>
-                <div style="display: flex; gap: 30px;">
-                    <a href="privacy.html" style="text-decoration: none; color: var(--text-muted);">Privacy Policy</a>
-                    <a href="#" style="text-decoration: none; color: var(--text-muted);">Terms</a>
-                </div>
+                <p>&copy; 2026 SahilCodeLab. All Rights Reserved. Made with ❤️ in India.</p>
+                <p>Distributed by SahilCodeLab Distribution.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Init AOS
-        AOS.init({ duration: 1000, once: true, offset: 100 });
-
-        // Header Effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-        });
-
-        // Preloader Logic
-        const count = document.getElementById('count');
-        const bar = document.getElementById('bar');
-        const preloader = document.getElementById('preloader');
-        const status = document.getElementById('status');
-        const systemLogs = ["ENCRYPTING DATA", "PHASING NEURAL LINK", "RENDERING ART", "SYYTEM READY"];
-
-        let percent = 0;
-        const speed = setInterval(() => {
-            percent += Math.floor(Math.random() * 6) + 2;
-            if (percent >= 100) {
-                percent = 100;
-                clearInterval(speed);
-                setTimeout(() => {
-                    preloader.classList.add('fade-out');
-                }, 800);
-            }
-            count.innerText = percent;
-            bar.style.width = percent + '%';
-
-            if (percent > 85) status.innerText = systemLogs[3];
-            else if (percent > 65) status.innerText = systemLogs[2];
-            else if (percent > 35) status.innerText = systemLogs[1];
-        }, 60);
-
-        console.log("Wrapify UI v2.5 Loaded. Developed by SahilCodeLab.");
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
