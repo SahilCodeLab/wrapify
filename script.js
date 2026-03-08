@@ -6,6 +6,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("Live Test: 1.0.2");
     // 1. AOS Animation Initialization
     if (typeof AOS !== 'undefined') {
         AOS.init({
