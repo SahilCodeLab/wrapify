@@ -1,115 +1,156 @@
-// AOS Core Initialization
+/**
+ * Wrapify — Cinematic WhatsApp Chat Analytics
+ * Handcrafted by SahilCodeLab
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({
-        duration: 1000,
-        once: true,
-        easing: 'ease-out-quad',
-        offset: 100
+    // 1. AOS Animation Initialization
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-quad',
+            offset: 100
+        });
+    }
+
+    // 2. Razorpay Integration (₹99)
+    const RAZORPAY_KEY_ID = 'rzp_test_SOg4TjdLaE94QV';
+
+    document.querySelectorAll('.buy-now').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const apkFile = this.getAttribute('data-apk') || 'app-release.apk';
+
+            if (typeof Razorpay === 'undefined') {
+                alert("Payment gateway is loading. Please try again in a second.");
+                return;
+            }
+
+            const options = {
+                "key": RAZORPAY_KEY_ID,
+                "amount": "9900", // ₹99 in paise
+                "currency": "INR",
+                "name": "SahilCodeLab",
+                "description": "Wrapify Premium APK",
+                "image": "icon.jpg",
+                "handler": function (response) {
+                    // Payment Success
+                    console.log("Payment Successful:", response.razorpay_payment_id);
+                    triggerDownload(apkFile);
+                },
+                "prefill": {
+                    "name": "",
+                    "email": "",
+                    "contact": ""
+                },
+                "theme": {
+                    "color": "#c9a84c" // Gold theme color
+                }
+            };
+
+            const rzp = new Razorpay(options);
+
+            rzp.on('payment.failed', function (response) {
+                alert("Payment failed, please try again");
+                console.error("Payment Failed:", response.error.description);
+            });
+
+            rzp.open();
+        });
     });
 
-    console.log("Wrapify Premium UI — Handcrafted by SahilCodeLab.");
-});
-
-// Header scroll effect with refined control
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+    function triggerDownload(apkFile) {
+        const link = document.createElement('a');
+        link.href = apkFile;
+        link.download = apkFile;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
-});
 
-// Smooth scrolling for all internal navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const targetId = this.getAttribute('href');
+    // 3. Header Scroll Effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
 
-        if (targetId.startsWith('#') && targetId.length > 1) {
-            e.preventDefault();
+    // 4. Smooth Scroll for Nav Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                const headerOffset = 100;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
+                e.preventDefault();
+                const offset = header ? header.offsetHeight : 0;
                 window.scrollTo({
-                    top: offsetPosition,
+                    top: targetElement.offsetTop - offset,
                     behavior: 'smooth'
                 });
+                // Close mobile menu if active
+                document.querySelector('.nav-links')?.classList.remove('active');
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                if (toggle) toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
             }
-        }
+        });
     });
+
+    // 5. Mobile Menu Toggle & Styles Injection
+    const navContainer = document.querySelector('.nav-container');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (navContainer && navLinks) {
+        // Injecting essential mobile styles to keep script.js self-contained
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .mobile-menu-toggle { display: none; font-size: 1.5rem; color: white; cursor: pointer; transition: 0.3s; }
+            @media (max-width: 768px) {
+                .mobile-menu-toggle { display: block; order: 2; }
+                .nav-links { 
+                    display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                    background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(20px);
+                    flex-direction: column; padding: 40px; gap: 24px; text-align: center;
+                    border-bottom: 1px solid rgba(255,255,255,0.1);
+                }
+                .nav-links.active { display: flex; }
+                .btn-download { display: none; }
+                header.scrolled .nav-links { top: 60px; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        const toggle = document.createElement('div');
+        toggle.className = 'mobile-menu-toggle';
+        toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        navContainer.appendChild(toggle);
+
+        toggle.addEventListener('click', () => {
+            const isActive = navLinks.classList.toggle('active');
+            toggle.innerHTML = isActive
+                ? '<i class="fa-solid fa-xmark"></i>'
+                : '<i class="fa-solid fa-bars"></i>';
+        });
+    }
+
+    // 6. Hero Parallax Effect
+    const mockup = document.querySelector('.mockup-container');
+    if (mockup) {
+        window.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+            mockup.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mockup.style.transform = `rotateY(-15deg) rotateX(10deg)`;
+        });
+    }
+
+    console.log("Wrapify Script Initialized — SahilCodeLab");
 });
-
-// Parallax/Hover intensity for Hero Mockup
-const mockup = document.querySelector('.mockup-container');
-if (mockup) {
-    window.addEventListener('mousemove', (e) => {
-        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-        mockup.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    });
-
-    window.addEventListener('mouseleave', () => {
-        mockup.style.transform = `rotateY(-15deg) rotateX(10deg)`;
-    });
-}
-// Razorpay Payment Integration
-const RAZORPAY_KEY_ID = 'rzp_test_XXXXXXXXXXXXXX'; // REPLACE THIS WITH YOUR ACTUAL RAZORPAY KEY ID
-
-document.querySelectorAll('.buy-now').forEach(button => {
-    button.addEventListener('click', function (e) {
-        e.preventDefault();
-        const apkFile = this.getAttribute('data-apk');
-        initiatePayment(apkFile);
-    });
-});
-
-function initiatePayment(apkFile) {
-    const options = {
-        "key": RAZORPAY_KEY_ID,
-        "amount": "9900", // Amount is in currency subunits. Default currency is INR. Hence, 9900 refers to 9900 paise = ₹99.
-        "currency": "INR",
-        "name": "Wrapify — SahilCodeLab",
-        "description": "Unlock Cinematic Chat Analytics (One-time Payment)",
-        "image": "icon.jpg",
-        "handler": function (response) {
-            // This function runs on SUCCESSFUL payment
-            console.log("Payment Successful:", response.razorpay_payment_id);
-            triggerDownload(apkFile);
-
-            // Optional: Show a success message
-            alert("Payment Successful! Your download will start automatically.");
-        },
-        "prefill": {
-            "name": "", // Can be pre-filled if you have user data
-            "email": "",
-            "contact": ""
-        },
-        "notes": {
-            "address": "Wrapify Digital Purchase"
-        },
-        "theme": {
-            "color": "#00ff88" // Emerald Green accent color from the site
-        }
-    };
-
-    const rzp1 = new Razorpay(options);
-
-    rzp1.on('payment.failed', function (response) {
-        alert("Payment Failed: " + response.error.description);
-        console.error("Payment Error:", response.error);
-    });
-
-    rzp1.open();
-}
-
-function triggerDownload(apkFile) {
-    const link = document.createElement('a');
-    link.href = apkFile;
-    link.download = apkFile;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
