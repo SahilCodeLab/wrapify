@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Razorpay Integration (₹99)
+    // 2. Razorpay Integration (₹1)
     const RAZORPAY_KEY_ID = 'rzp_live_SOiMZh5cvWxJ1u';
 
     // Function to handle the actual payment logic
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const options = {
             "key": RAZORPAY_KEY_ID,
-            "amount": "9900", // ₹99 in paise
+            "amount": "100", // ₹1 in paise
             "currency": "INR",
             "name": "SahilCodeLab",
             "description": "Wrapify Premium APK",
