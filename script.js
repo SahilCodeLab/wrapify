@@ -55,3 +55,61 @@ if (mockup) {
         mockup.style.transform = `rotateY(-15deg) rotateX(10deg)`;
     });
 }
+// Razorpay Payment Integration
+const RAZORPAY_KEY_ID = 'rzp_test_XXXXXXXXXXXXXX'; // REPLACE THIS WITH YOUR ACTUAL RAZORPAY KEY ID
+
+document.querySelectorAll('.buy-now').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        const apkFile = this.getAttribute('data-apk');
+        initiatePayment(apkFile);
+    });
+});
+
+function initiatePayment(apkFile) {
+    const options = {
+        "key": RAZORPAY_KEY_ID,
+        "amount": "9900", // Amount is in currency subunits. Default currency is INR. Hence, 9900 refers to 9900 paise = ₹99.
+        "currency": "INR",
+        "name": "Wrapify — SahilCodeLab",
+        "description": "Unlock Cinematic Chat Analytics (One-time Payment)",
+        "image": "icon.jpg",
+        "handler": function (response) {
+            // This function runs on SUCCESSFUL payment
+            console.log("Payment Successful:", response.razorpay_payment_id);
+            triggerDownload(apkFile);
+
+            // Optional: Show a success message
+            alert("Payment Successful! Your download will start automatically.");
+        },
+        "prefill": {
+            "name": "", // Can be pre-filled if you have user data
+            "email": "",
+            "contact": ""
+        },
+        "notes": {
+            "address": "Wrapify Digital Purchase"
+        },
+        "theme": {
+            "color": "#00ff88" // Emerald Green accent color from the site
+        }
+    };
+
+    const rzp1 = new Razorpay(options);
+
+    rzp1.on('payment.failed', function (response) {
+        alert("Payment Failed: " + response.error.description);
+        console.error("Payment Error:", response.error);
+    });
+
+    rzp1.open();
+}
+
+function triggerDownload(apkFile) {
+    const link = document.createElement('a');
+    link.href = apkFile;
+    link.download = apkFile;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}

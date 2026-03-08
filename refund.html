@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Refund Policy — Wrapify</title>
+    <meta name="author" content="SahilCodeLab">
+    <link rel="icon" type="image/jpeg" href="icon.jpg">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        .legal-content {
+            padding: 180px 0 100px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .legal-content h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 8vw, 4rem);
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+            font-weight: 800;
+        }
+
+        .legal-content h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .legal-content p,
+        .legal-content li {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .legal-content ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .legal-content li::before {
+            content: "—";
+            color: var(--primary);
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        /* Refund Specific Highlight */
+        .refund-card {
+            background: var(--bg-glass);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-glass);
+            border-left: 4px solid var(--primary);
+            padding: 30px;
+            border-radius: 0 24px 24px 0;
+            margin-top: 20px;
+        }
+
+        .refund-card strong {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header" class="scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="icon.jpg" alt="Wrapify Icon">
+                WRAPIFY<span>.</span>
+            </a>
+            <a href="index.html" class="btn-download">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="legal-content">
+            <span class="hero-tag" data-aos="fade-right">Official Policy</span>
+            <h1 data-aos="fade-up">Refund Policy</h1>
+            <p data-aos="fade-up">At <strong>SahilCodeLab</strong>, we strive to provide the highest quality digital
+                intelligence. This policy outlines our commitment to transparency regarding payments and refunds for the
+                Wrapify application.</p>
+
+            <h2 data-aos="fade-up">1. Overview</h2>
+            <p data-aos="fade-up">Wrapify requires a <strong>one-time payment of ₹99</strong> to unlock premium
+                cinematic analytics. This fee supports our secure, offline-first processing architecture.</p>
+
+            <h2 data-aos="fade-up">2. Eligibility for Refund</h2>
+            <p data-aos="fade-up">Refunds are considered under the following specific circumstances:</p>
+            <ul data-aos="fade-up">
+                <li>Technical defects that prevent the app from functioning as advertised.</li>
+                <li>Duplicate charges for the same transaction.</li>
+                <li>Refund request made within <strong>7 days</strong> of purchase.</li>
+            </ul>
+
+            <h2 data-aos="fade-up">3. Non-Refundable Scenarios</h2>
+            <ul data-aos="fade-up">
+                <li>Change of mind after a successful digital delivery.</li>
+                <li>Device incompatibility (please verify Android OS support before purchase).</li>
+                <li>Request received after the 7-day window.</li>
+                <li>Suspected abuse of the refund policy.</li>
+            </ul>
+
+            <h2 data-aos="fade-up">4. Request Protocol</h2>
+            <div class="refund-card" data-aos="zoom-in">
+                <p>To request a refund, please email <strong>contact@sahilcodelab.com</strong> with:</p>
+                <ul>
+                    <li>Transaction ID (from Razorpay)</li>
+                    <li>Payment Date</li>
+                    <li>Brief description of the issue</li>
+                </ul>
+            </div>
+
+            <h2 data-aos="fade-up">5. Processing Timeline</h2>
+            <p data-aos="fade-up">Approved refunds are processed to the original payment source:</p>
+            <ul data-aos="fade-up">
+                <li><strong>UPI:</strong> 3-5 Business Days.</li>
+                <li><strong>Cards/NetBanking:</strong> 5-7 Business Days.</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center;">
+            <p>&copy; 2026 SahilCodeLab. Engineered in India.</p>
+            <p style="color: #64748b; font-size: 0.8rem; margin-top: 10px;">Wrapify v1.0.5</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-quad'
+        });
+    </script>
+</body>
+
+</html>
