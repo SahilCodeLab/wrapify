@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "amount": "9900", // ₹99 in paise
             "currency": "INR",
             "name": "SahilCodeLab",
-            "description": "Wrapify Premium APK",
+            "description": "Wrapify Premium Lifetime Access (₹99)",
             "image": "icon.jpg",
             "handler": function (response) {
                 // Payment Success
