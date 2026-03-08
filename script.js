@@ -6,7 +6,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Live Test: 1.0.2");
+    console.log("Wrapify v1.0.3 — SahilCodeLab");
     // 1. AOS Animation Initialization
     if (typeof AOS !== 'undefined') {
         AOS.init({
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Razorpay Integration (₹1)
+    // 2. Razorpay Integration (₹99)
     const RAZORPAY_KEY_ID = 'rzp_live_SOiMZh5cvWxJ1u';
 
     // Function to handle the actual payment logic
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const options = {
             "key": RAZORPAY_KEY_ID,
-            "amount": "100", // ₹1 in paise
+            "amount": "9900", // ₹99 in paise
             "currency": "INR",
             "name": "SahilCodeLab",
             "description": "Wrapify Premium APK",
