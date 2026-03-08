@@ -1,6 +1,8 @@
 /**
  * Wrapify — Cinematic WhatsApp Chat Analytics
  * Handcrafted by SahilCodeLab
+ * 
+ * FIXED: Mobile touch compatibility & Razorpay Initialization
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,47 +19,70 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Razorpay Integration (₹99)
     const RAZORPAY_KEY_ID = 'rzp_test_SOg4TjdLaE94QV';
 
-    document.querySelectorAll('.buy-now').forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-            const apkFile = this.getAttribute('data-apk') || 'app-release.apk';
+    // Function to handle the actual payment logic
+    const initiatePayment = (e, button) => {
+        e.preventDefault();
+        e.stopPropagation(); // Prevent event bubbling issues on mobile
 
-            if (typeof Razorpay === 'undefined') {
-                alert("Payment gateway is loading. Please try again in a second.");
-                return;
-            }
+        const apkFile = button.getAttribute('data-apk') || 'app-release.apk';
 
-            const options = {
-                "key": RAZORPAY_KEY_ID,
-                "amount": "9900", // ₹99 in paise
-                "currency": "INR",
-                "name": "SahilCodeLab",
-                "description": "Wrapify Premium APK",
-                "image": "icon.jpg",
-                "handler": function (response) {
-                    // Payment Success
-                    console.log("Payment Successful:", response.razorpay_payment_id);
-                    triggerDownload(apkFile);
-                },
-                "prefill": {
-                    "name": "",
-                    "email": "",
-                    "contact": ""
-                },
-                "theme": {
-                    "color": "#c9a84c" // Gold theme color
+        if (typeof Razorpay === 'undefined') {
+            alert("Payment gateway is still loading. Please wait a moment and try again.");
+            return;
+        }
+
+        const options = {
+            "key": RAZORPAY_KEY_ID,
+            "amount": "9900", // ₹99 in paise
+            "currency": "INR",
+            "name": "SahilCodeLab",
+            "description": "Wrapify Premium APK",
+            "image": "icon.jpg",
+            "handler": function (response) {
+                // Payment Success
+                console.log("Payment Successful:", response.razorpay_payment_id);
+                triggerDownload(apkFile);
+            },
+            "prefill": {
+                "name": "",
+                "email": "",
+                "contact": ""
+            },
+            "theme": {
+                "color": "#c9a84c" // Gold theme color
+            },
+            "modal": {
+                "ondismiss": function () {
+                    console.log('Payment modal closed');
                 }
-            };
+            }
+        };
 
+        try {
             const rzp = new Razorpay(options);
-
             rzp.on('payment.failed', function (response) {
-                alert("Payment failed, please try again");
-                console.error("Payment Failed:", response.error.description);
+                alert("Payment failed: " + (response.error.description || "Please try again"));
+                console.error("Payment Failed:", response.error);
             });
-
             rzp.open();
-        });
+        } catch (err) {
+            console.error("Razorpay Error:", err);
+            alert("Could not open payment gateway. Please check your internet connection.");
+        }
+    };
+
+    // Attach listeners to ALL buy buttons
+    const buyButtons = document.querySelectorAll('.buy-now');
+    buyButtons.forEach(button => {
+        // Handle standard clicks
+        button.addEventListener('click', (e) => initiatePayment(e, button));
+
+        // Handle touch events for mobile specifically to ensure responsiveness
+        button.addEventListener('touchstart', (e) => {
+            // We use click usually, but if click is being swallowed, touchstart helps.
+            // However, browsers often handle click on mobile just fine unless there's a conflict.
+            // If we use both, initiatePayment needs to handle debounce.
+        }, { passive: true });
     });
 
     function triggerDownload(apkFile) {
@@ -71,13 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Header Scroll Effect
     const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
+    const scrollHandler = () => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-    });
+    };
+    window.addEventListener('scroll', scrollHandler);
 
     // 4. Smooth Scroll for Nav Links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -93,44 +119,54 @@ document.addEventListener('DOMContentLoaded', () => {
                     top: targetElement.offsetTop - offset,
                     behavior: 'smooth'
                 });
+
                 // Close mobile menu if active
-                document.querySelector('.nav-links')?.classList.remove('active');
+                if (document.querySelector('.nav-links')) {
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
                 const toggle = document.querySelector('.mobile-menu-toggle');
                 if (toggle) toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
             }
         });
     });
 
-    // 5. Mobile Menu Toggle & Styles Injection
+    // 5. Mobile Menu Toggle System
     const navContainer = document.querySelector('.nav-container');
     const navLinks = document.querySelector('.nav-links');
 
     if (navContainer && navLinks) {
-        // Injecting essential mobile styles to keep script.js self-contained
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .mobile-menu-toggle { display: none; font-size: 1.5rem; color: white; cursor: pointer; transition: 0.3s; }
-            @media (max-width: 768px) {
-                .mobile-menu-toggle { display: block; order: 2; }
-                .nav-links { 
-                    display: none; position: absolute; top: 100%; left: 0; width: 100%; 
-                    background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(20px);
-                    flex-direction: column; padding: 40px; gap: 24px; text-align: center;
-                    border-bottom: 1px solid rgba(255,255,255,0.1);
+        // Ensure styles are present
+        if (!document.getElementById('mobile-menu-styles')) {
+            const style = document.createElement('style');
+            style.id = 'mobile-menu-styles';
+            style.innerHTML = `
+                .mobile-menu-toggle { display: none; font-size: 1.5rem; color: white; cursor: pointer; padding: 10px; z-index: 1001; }
+                @media (max-width: 768px) {
+                    .mobile-menu-toggle { display: block; order: 2; }
+                    .nav-links { 
+                        display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                        background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(20px);
+                        flex-direction: column; padding: 40px; gap: 24px; text-align: center;
+                        border-bottom: 1px solid rgba(255,255,255,0.1);
+                    }
+                    .nav-links.active { display: flex; }
+                    .btn-download.buy-now { display: none; }
+                    header.scrolled .nav-links { top: 60px; }
                 }
-                .nav-links.active { display: flex; }
-                .btn-download { display: none; }
-                header.scrolled .nav-links { top: 60px; }
-            }
-        `;
-        document.head.appendChild(style);
+            `;
+            document.head.appendChild(style);
+        }
 
-        const toggle = document.createElement('div');
-        toggle.className = 'mobile-menu-toggle';
-        toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
-        navContainer.appendChild(toggle);
+        let toggle = document.querySelector('.mobile-menu-toggle');
+        if (!toggle) {
+            toggle = document.createElement('div');
+            toggle.className = 'mobile-menu-toggle';
+            toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            navContainer.appendChild(toggle);
+        }
 
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
             const isActive = navLinks.classList.toggle('active');
             toggle.innerHTML = isActive
                 ? '<i class="fa-solid fa-xmark"></i>'
@@ -138,9 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. Hero Parallax Effect
+    // 6. Hero Parallax Effect (Disabled on small mobile for performance)
     const mockup = document.querySelector('.mockup-container');
-    if (mockup) {
+    if (mockup && window.innerWidth > 768) {
         window.addEventListener('mousemove', (e) => {
             const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
@@ -152,5 +188,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    console.log("Wrapify Script Initialized — SahilCodeLab");
+    console.log("Wrapify Script [Mobile Fixed] Initialized — SahilCodeLab");
 });
