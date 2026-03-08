@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Razorpay Integration (₹99)
-    const RAZORPAY_KEY_ID = 'rzp_test_SOg4TjdLaE94QV';
+    const RAZORPAY_KEY_ID = 'rzp_live_SOiMZh5cvWxJ1u';
 
     // Function to handle the actual payment logic
     const initiatePayment = (e, button) => {
