@@ -61,7 +61,7 @@
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",
-        "ratingCount": "1250"
+        "ratingCount": "1265"
       },
       "offers": {
         "@type": "Offer",
@@ -79,6 +79,19 @@
 <body>
     <div style="overflow-x: hidden; width: 100%; position: relative;">
 
+        <!-- High-Converting Top Offer Banner -->
+        <div style="background: linear-gradient(90deg, #00ff88, #00bd68); color: #0b0f19; text-align: center; padding: 10px 15px; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.5px; position: relative; z-index: 1000; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <span>🔥 <strong>FLASH SALE:</strong> 95% OFF Today!</span>
+            <span style="background: rgba(0,0,0,0.15); padding: 2px 10px; border-radius: 20px; font-size: 0.82rem;">
+                <span style="text-decoration: line-through; opacity: 0.7;">₹1,999</span> 
+                <strong style="color: #000; font-size: 1rem; margin-left: 4px;">₹99 ONLY</strong>
+            </span>
+            <span style="background: #0b0f19; color: #00ff88; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+                <span style="height: 8px; width: 8px; background: #00ff88; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite;"></span>
+                1,265 Purchased Today
+            </span>
+        </div>
+
         <header id="header">
             <div class="nav-container">
                 <a href="#" class="logo">
@@ -93,7 +106,8 @@
                 </ul>
                 <a href="javascript:void(0)" class="btn-download buy-now" data-apk="app-release.apk">
                     <i class="fa-solid fa-crown" style="color: #ffd700;"></i>
-                    Get Premium — ₹99
+                    <span>Get Premium — ₹99</span>
+                    <span style="text-decoration: line-through; opacity: 0.5; font-size: 0.8em;">₹1,999</span>
                 </a>
             </div>
         </header>
@@ -103,24 +117,65 @@
             <section class="hero" id="philosophy">
                 <div class="container hero-grid">
                     <div class="hero-content" data-aos="fade-right">
-                        <span class="hero-tag">Official Release</span>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap;">
+                            <span class="hero-tag">Official Release</span>
+                            <span style="background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.4); padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">
+                                ⚡ Limited Time (Save ₹1,900)
+                            </span>
+                        </div>
+
                         <h1>Digital Relationships, <br> <span class="text-gradient">Decoded.</span></h1>
                         <p>In a world where 90% of our conversations are digital, Wrapify acts as your
                             <strong>Relationship Mirror</strong>. The premier app that transforms plain .txt
                             chat exports into a luxurious 3D animated visual experience.
                         </p>
-                        <div class="hero-btns">
-                            <a href="javascript:void(0)" class="btn-premium btn-primary buy-now"
-                                data-apk="app-release.apk">Unlock Premium Access — ₹99</a>
+
+                        <!-- Live Social Proof & Purchase Stats Banner -->
+                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 15px 20px; margin: 25px 0; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="display: flex; margin-right: -5px;">
+                                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #00ff88; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 900; font-size: 0.75rem; border: 2px solid #0b0f19;">SR</div>
+                                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 0.75rem; border: 2px solid #0b0f19; margin-left: -10px;">AK</div>
+                                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #ec4899; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 0.75rem; border: 2px solid #0b0f19; margin-left: -10px;">PS</div>
+                                </div>
+                                <div>
+                                    <div style="font-weight: 800; font-size: 1.05rem; color: #fff; display: flex; align-items: center; gap: 6px;">
+                                        <span>1,265+ Purchases</span>
+                                        <i class="fa-solid fa-circle-check" style="color: #00ff88; font-size: 0.85rem;"></i>
+                                    </div>
+                                    <div style="font-size: 0.78rem; color: #94a3b8;">1,200+ Users Claimed</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px; background: rgba(255, 215, 0, 0.1); padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255, 215, 0, 0.2);">
+                                <i class="fa-solid fa-star" style="color: #ffd700; font-size: 0.9rem;"></i>
+                                <span style="font-weight: 800; color: #ffd700; font-size: 0.9rem;">4.8 / 5.0</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Section -->
+                        <div class="hero-btns" style="align-items: center; gap: 15px;">
+                            <a href="javascript:void(0)" class="btn-premium btn-primary buy-now" data-apk="app-release.apk" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px;">
+                                <i class="fa-solid fa-bolt" style="color: #000;"></i>
+                                <span>Get Access — ₹99</span>
+                                <span style="text-decoration: line-through; font-size: 0.85em; opacity: 0.65;">₹1,999</span>
+                            </a>
                             <a href="#intelligence" class="btn-premium btn-secondary">Feature Showcase</a>
                         </div>
-                        <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b; font-weight: 400;">
-                            <i class="fa-solid fa-circle-check" style="color: var(--primary); margin-right: 5px;"></i>
-                            One-time purchase • Lifetime access • Instant activation
-                        </p>
+                        
+                        <div style="margin-top: 15px; display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.82rem; color: #64748b;">
+                            <span><i class="fa-solid fa-circle-check" style="color: var(--primary);"></i> One-Time Purchase</span>
+                            <span><i class="fa-solid fa-circle-check" style="color: var(--primary);"></i> Lifetime Unlimited Access</span>
+                            <span><i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> 100% Offline & Private</span>
+                        </div>
                     </div>
+
                     <div class="hero-image" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="mockup-container">
+                        <div class="mockup-container" style="position: relative;">
+                            <!-- Floating Badge over image -->
+                            <div style="position: absolute; top: 15px; right: 15px; background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(0, 255, 136, 0.3); padding: 8px 14px; border-radius: 12px; z-index: 10; display: flex; align-items: center; gap: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                                <i class="fa-solid fa-fire" style="color: #ff4757;"></i>
+                                <span style="font-size: 0.78rem; font-weight: 700; color: #fff;">1,200+ Downloads</span>
+                            </div>
                             <img src="Slice 1.jpg"
                                 alt="Wrapify Hero Dashboard - Secure WhatsApp Chat Analytics Visualization">
                         </div>
@@ -243,31 +298,46 @@
                 </div>
             </section>
 
-            <!-- Final Onboarding CTA -->
-            <section style="padding: 160px 0; text-align: center;">
+            <!-- Final Onboarding CTA Section -->
+            <section style="padding: 140px 0; text-align: center;">
                 <div class="container" data-aos="fade-up">
-                    <h2 class="massive-heading">Start Your Journey.</h2>
-                    <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; text-align: left;">
-                        <div class="glass-card" style="padding: 30px; max-width: 300px; border-radius: 24px;">
-                            <h4 style="color: var(--primary); margin-bottom: 12px;">Step 01 - Export</h4>
-                            <p style="color: #94a3b8; font-size: 0.9rem;">WhatsApp Chat -> Export Chat ->
-                                <strong>Without Media</strong>.
-                            </p>
+                    <span style="background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.3); padding: 6px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 700; text-transform: uppercase;">
+                        🔥 Join 1,265+ Happy Users Today
+                    </span>
+                    <h2 class="massive-heading" style="margin-top: 15px;">Start Your Journey.</h2>
+                    
+                    <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; text-align: left;">
+                        <div class="glass-card" style="padding: 25px; max-width: 280px; border-radius: 20px;">
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Step 01 - Export</h4>
+                            <p style="color: #94a3b8; font-size: 0.88rem;">WhatsApp Chat -> Export Chat -> <strong>Without Media</strong>.</p>
                         </div>
-                        <div class="glass-card" style="padding: 30px; max-width: 300px; border-radius: 24px;">
-                            <h4 style="color: var(--primary); margin-bottom: 12px;">Step 02 - Import</h4>
-                            <p style="color: #94a3b8; font-size: 0.9rem;">Open the exported .txt with Wrapify. The local parser completes analysis in seconds.</p>
+                        <div class="glass-card" style="padding: 25px; max-width: 280px; border-radius: 20px;">
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Step 02 - Import</h4>
+                            <p style="color: #94a3b8; font-size: 0.88rem;">Open the exported .txt with Wrapify. The local parser analyzes in seconds.</p>
                         </div>
-                        <div class="glass-card" style="padding: 30px; max-width: 300px; border-radius: 24px;">
-                            <h4 style="color: var(--primary); margin-bottom: 12px;">Step 03 - Analyze</h4>
-                            <p style="color: #94a3b8; font-size: 0.9rem;">View and share your digital relationship insights in beautiful 3D animations.</p>
+                        <div class="glass-card" style="padding: 25px; max-width: 280px; border-radius: 20px;">
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Step 03 - Analyze</h4>
+                            <p style="color: #94a3b8; font-size: 0.88rem;">View and share your relationship insights in 3D animations.</p>
                         </div>
                     </div>
-                    <a href="javascript:void(0)" class="btn-premium btn-primary btn-cta-massive buy-now"
-                        data-apk="app-release.apk">Get Lifetime Access — ₹99</a>
-                    <p style="margin-top: 20px; color: #64748b; font-size: 0.9rem;">
-                        One-time payment • Lifetime unlimited usage • Digital product (All sales final)
-                    </p>
+
+                    <!-- Bottom Conversion Box -->
+                    <div style="background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,255,136,0.05) 100%); border: 1px solid rgba(0,255,136,0.2); border-radius: 24px; padding: 40px 20px; max-width: 650px; margin: 0 auto;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Unlock Wrapify Premium</h3>
+                        <p style="color: #94a3b8; margin-bottom: 25px; font-size: 0.95rem;">Get lifetime access to all 3D themes, deep analytics & instant social frame exports.</p>
+                        
+                        <a href="javascript:void(0)" class="btn-premium btn-primary buy-now" data-apk="app-release.apk" style="display: inline-flex; align-items: center; gap: 12px; padding: 18px 40px; font-size: 1.1rem;">
+                            <i class="fa-solid fa-crown" style="color: #000;"></i>
+                            <span>Buy Lifetime Pass — ₹99</span>
+                            <span style="text-decoration: line-through; font-size: 0.8em; opacity: 0.65;">₹1,999</span>
+                        </a>
+
+                        <div style="margin-top: 20px; font-size: 0.82rem; color: #64748b; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                            <span>⚡ Instant Delivery</span>
+                            <span>🔒 256-Bit SSL Secured</span>
+                            <span>♾️ Lifetime Updates</span>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
